@@ -1,6 +1,47 @@
+// $primary: #7E7E7E;
 
 .sectionTitle {
+  margin-top: 0;
+}
 
-margin-top: 0;
+.registerSection {
+  form {
+    border: none;
 
+    .fieldSet {
+      max-width: 280px;
+      align-items: center;
+      justify-content: center;
+      border: none;
+    }
+
+    .TextField {
+      margin: 20px auto;
+      position: relative;
+
+      &.phone::after {
+        display: block;
+        position: absolute;
+        content: '+38 (XXX) XXX - XX - XX';
+        font-family: 'Nunito';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+        color: #7e7e7e;
+        bottom: -20px;
+        left: 14px;
+      }
+
+      input {
+      padding: 14px 16px;
+      }
+
+    }
+
+    // input[type='radio'],
+    // input[type='file'] {
+    //   width: auto;
+    // }
+  }
 }
