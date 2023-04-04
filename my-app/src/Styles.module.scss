@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+$bg-yellow: #f4e041;
+$bg-blue: #00bdd3;
+$bg-light-gray: #f8f8f8;
+
+body {
+  background: $bg-light-gray;
+  margin: 0;
+}
+
+body,
+p {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+h1,
+h2,
+h3 {
+  font-size: 40px;
+  line-height: 40px;
+  font-weight: 400;
+}
+
+button {
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 4px 20px;
+  margin: auto;
+  border-radius: 15px;
+  border: none;
+  min-width: 100px;
+  height: 34px;
+  cursor: pointer;
+
+  &.primary {
+    color: rgba(0, 0, 0, 0.87);
+    background: $bg-yellow;
+
+    &:hover {
+      background: #ffe302;
+    }
+  }
+
+  &.disabled {
+    background: #b4b4b4;
+    color: rgba(255, 255, 255, 0.87);
+  }
+}
