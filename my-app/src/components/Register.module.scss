@@ -1,4 +1,7 @@
-// $primary: #7E7E7E;
+.sectionAbout{
+  // align-items: flex-start;
+justify-content: flex-start;
+}
 
 .sectionTitle {
   margin-top: 0;
@@ -8,15 +11,18 @@
   form {
     border: none;
 
-    .fieldSet {
-      max-width: 280px;
+    .fieldsGroup {
+      margin: 0 auto 20px 0;
+      max-width: 380px;
+      min-height: 54px;
       align-items: center;
       justify-content: center;
       border: none;
     }
 
-    .TextField {
-      margin: 20px auto;
+    .textField {
+      width: 100%;
+      margin: 10px auto 40px;
       position: relative;
 
       &.phone::after {
@@ -34,14 +40,30 @@
       }
 
       input {
-      padding: 14px 16px;
+        padding: 14px 16px;
       }
-
     }
-
-    // input[type='radio'],
-    // input[type='file'] {
-    //   width: auto;
-    // }
   }
+}
+
+.fieldsGroup,
+.inputFileEmement {
+  margin: 40px auto;
+}
+
+.radioGroup {
+  margin: 0;
+
+
+
+}
+
+
+.fileInput {
+  width: 297px;
+  border-radius: 0 4px 4px 0;
+}
+
+.inputFileEmement {
+  margin-bottom: 50px;
 }
