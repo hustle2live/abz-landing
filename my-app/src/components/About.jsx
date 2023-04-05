@@ -1,9 +1,28 @@
+import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import {
+  getUsers,
+  increaseUsersLimit,
+  resetUsersLimit
+} from '../store/userslice';
+
 import mainStyles from '../Styles.module.scss';
 import styles from './About.module.scss';
 
 // import Photo from './assets/photo-cover.svg';
 
 export const About = () => {
+  const { status, error, usersArray, usersLimit } = useSelector(
+    (state) => state
+  );
+
+  // const store = useSelector((state) => state);
+  // console.log(store);
+  console.log(usersLimit);
+
+  const dispatch = useDispatch();
+
   // const GetCards = () => {};
 
   return (
@@ -130,7 +149,10 @@ export const About = () => {
           </div>
         </div>
       </div>
-      <button className={`${styles.more} ${mainStyles.primary}`}>
+      <button
+        className={`${styles.more} ${mainStyles.primary}`}
+        onClick={() => dispatch(increaseUsersLimit())}
+      >
         Show more
       </button>
     </section>
