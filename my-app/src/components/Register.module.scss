@@ -1,6 +1,6 @@
-.sectionAbout{
-  // align-items: flex-start;
-justify-content: flex-start;
+.registerMainContainer {
+  justify-content: flex-start;
+  margin-bottom: 100px;
 }
 
 .sectionTitle {
@@ -12,7 +12,7 @@ justify-content: flex-start;
     border: none;
 
     .fieldsGroup {
-      margin: 0 auto 20px 0;
+      margin: 0 auto 8px 0;
       max-width: 380px;
       min-height: 54px;
       align-items: center;
@@ -22,7 +22,7 @@ justify-content: flex-start;
 
     .textField {
       width: 100%;
-      margin: 10px auto 40px;
+      margin: 12px auto 40px;
       position: relative;
 
       &.phone::after {
@@ -53,17 +53,50 @@ justify-content: flex-start;
 
 .radioGroup {
   margin: 0;
-
-
-
 }
-
 
 .fileInput {
   width: 297px;
   border-radius: 0 4px 4px 0;
+  max-height: 54px;
+  flex-grow: 1;
+
+  
 }
 
 .inputFileEmement {
+  display: flex;
+  flex-wrap: nowrap;
   margin-bottom: 50px;
+}
+
+.radioGroupTitle {
+  margin-bottom: 5px;
+}
+
+.radioGroupElement {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .registerSection form,
+  .registerSection form .fieldsGroup {
+    max-width: 328px;
+    margin: 0 auto;
+  }
+
+  .radioGroupTitle {
+    margin-top: 7px;
+  }
+
+  .registerSection form .inputFileEmement {
+    display: flex;
+    flex-wrap: nowrap;
+    max-width: 328px;
+  }
+
+  .fileInput {
+    flex-grow: 1;
+  }
 }

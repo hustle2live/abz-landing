@@ -50,6 +50,7 @@ button.more {
 
     &__name {
       margin: 20px auto;
+      white-space: nowrap;
     }
 
     &__description {
@@ -57,7 +58,82 @@ button.more {
       &__email,
       &__phone {
         margin: 0 auto;
+        white-space: nowrap;
       }
     }
   }
+}
+
+.truncateText {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 26px;
+  height: 26px;
+}
+
+@media screen and (max-width: 1170px) {
+  .container {
+    max-width: 1024px;
+  }
+
+  .cardSection .card {
+    max-width: 282px;
+  }
+
+  .cardSection {
+    max-width: 904px;
+  }
+
+.truncateText {
+  max-width: 242px;
+}
+
+}
+
+@media screen and (max-width: 1023px) {
+  .container {
+    max-width: 768px;
+  }
+  .cardSection .card {
+    max-width: 344px;
+    margin-bottom: 16px;
+  }
+
+  .cardSection {
+    max-width: 704px;
+  }
+
+  .truncateText {
+    max-width: 304px;
+  }
+
+  button.more {
+    margin-top: 34px;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    max-width: 360px;
+  }
+  .cardSection .card {
+    max-width: 328px;
+    margin-bottom: 20px;
+
+  }
+  .cardSection {
+    max-width: 328px;
+  }
+
+  .truncateText {
+    max-width: 288px;
+  }
+
+  button.more {
+    margin-top: 30px;
+  }
+
 }

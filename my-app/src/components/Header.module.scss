@@ -1,9 +1,8 @@
 .topBar {
   width: 100%;
   height: 60px;
-  // background-color: #ffffff;
-  background-color: #c1c1c1;
-
+  // background-color: #c1c1c1;
+  background-color: #ffffff;
 }
 
 .mainSection,
@@ -77,5 +76,47 @@
   button {
     margin: auto;
     margin-top: 17px;
+  }
+}
+
+// @media screen and (max-width: 1170px) {
+
+// }
+
+@media screen and (max-width: 1170px) {
+  .mainSection {
+    max-width: 1024px;
+  }
+  .topBarContainer {
+    max-width: 904px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .mainSection {
+    max-width: 768px;
+    max-height: 500px;
+  }
+  .topBarContainer {
+    max-width: 704px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mainSection {
+    max-width: 360px;
+
+    h1, 
+    p,
+    button {
+      max-width: 328px;
+    }
+
+    button {
+      margin-bottom: 70px;
+    }
+  }
+  .topBarContainer {
+    max-width: 328px;
   }
 }

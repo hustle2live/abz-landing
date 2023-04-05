@@ -44,33 +44,60 @@ const CssIconButton = styled(IconButton)({
     color: 'rgba(0, 0, 0, 0.87)',
     lineHeight: '26px',
     padding: '14px 15px',
-    border: '2px solid rgba(0, 0, 0, 0.87)',
-    borderRadius: '4px 0 0 4px'
+    border: '1px solid rgba(0, 0, 0, 0.87)',
+    borderRadius: '4px 0 0 4px',
+    boxSizing: 'border-box',
+    maxHeight: '54px'
+  },
+  '&.MuiButtonBase-root button': {
+    boxSizing: 'border-box',
+    maxHeight: '54px'
+  }
+});
+
+const CssRadioButton = styled(Radio)({
+  '&.MuiRadio-root': {
+    color: '#D0CFCF',
+    height: '34px'
+  },
+  '&.Mui-checked': {
+    color: '#00BDD3'
   }
 });
 
 const RadioButtonsGroup = () => (
   <FormControl className={styles.radioGroup}>
-    <FormLabel id='demo-radio-buttons-group-label'>
+    <FormLabel
+      id='demo-radio-buttons-group-label'
+      className={styles.radioGroupTitle}
+    >
       Select your position
     </FormLabel>
-    <RadioGroup
-      aria-labelledby='demo-radio-buttons-group-label'
-      defaultValue='female'
-      name='radio-buttons-group'
-    >
+    <RadioGroup defaultValue='backend' name='radio-buttons-group' color='#000'>
       <FormControlLabel
         value='frontend'
-        control={<Radio />}
+        control={<CssRadioButton />}
         label='Frontend developer'
+        className={styles.radioGroupElement}
       />
       <FormControlLabel
         value='backend'
-        control={<Radio />}
+        control={<CssRadioButton />}
         label='Backend Developer'
+        className={styles.radioGroupElement}
       />
-      <FormControlLabel value='designer' control={<Radio />} label='Designer' />
-      <FormControlLabel value='qa' control={<Radio />} label='QA' />
+      <FormControlLabel
+        value='designer'
+        control={<CssRadioButton />}
+        label='Designer'
+        className={styles.radioGroupElement}
+      />
+      <FormControlLabel
+        value='qa'
+        control={<CssRadioButton />}
+        label='QA'
+        className={styles.radioGroupElement}
+      />
     </RadioGroup>
   </FormControl>
 );
@@ -112,7 +139,9 @@ const UploadInputField = () => (
 
 export const Register = () => {
   return (
-    <section className={`${aboutStyles.container} ${styles.sectionAbout}`}>
+    <section
+      className={`${aboutStyles.container} ${styles.registerMainContainer}`}
+    >
       <h3 className={styles.sectionTitle}>Working with POST request</h3>
       <div className={styles.registerSection}>
         <form>
