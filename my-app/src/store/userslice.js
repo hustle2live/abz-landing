@@ -4,7 +4,8 @@ const initialState = {
   usersArray: [],
   status: null,
   error: null,
-  usersLimit: 6
+  usersLimit: 6,
+  fetchData: null
 };
 
 export const fetchUsers = createAsyncThunk(
@@ -12,10 +13,9 @@ export const fetchUsers = createAsyncThunk(
   async function (limit = 6, { rejectWithValue }) {
     try {
       const response = await fetch(
-        `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`
+        `https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=${limit}`
       );
       if (!response.ok) throw new Error('Server error');
-      console.log(response);
 
       const data = await response.json();
       return data;
@@ -49,9 +49,11 @@ export const userSlice = createSlice({
 
     [fetchUsers.fulfilled]: (state, action) => {
       state.status = 'resolved';
-      state.newsArray = state.removed.length
-        ? filteringUsersState(action.payload, state.removed)
-        : action.payload;
+      state.fetchData = action.payload;
+      state.usersArray = action.payload.users || null;
+      // state.newsArray = state.removed.length
+      //   ? filteringUsersState(action.payload, state.removed)
+      //   : action.payload;
     },
 
     [fetchUsers.rejected]: (state, action) => {
