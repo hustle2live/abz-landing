@@ -137,6 +137,11 @@ const UploadInputField = () => (
   </div>
 );
 
+const formDataHandler = (e) => {
+  e.preventDefault();
+  return false;
+};
+
 export const Register = () => {
   return (
     <section
@@ -144,13 +149,19 @@ export const Register = () => {
     >
       <h3 className={styles.sectionTitle}>Working with POST request</h3>
       <div className={styles.registerSection}>
-        <form>
+        <form action='/' method='post' enctype='multipart/form-data'>
           <TextFieldsGroup />
           <RadioButtonsGroup />
           <UploadInputField />
         </form>
       </div>
-      <button className={mainStyles.disabled}> Sing up</button>
+      <button
+        className={mainStyles.disabled}
+        onClick={(e) => formDataHandler(e)}
+      >
+        {' '}
+        Sing up
+      </button>
     </section>
   );
 };
