@@ -7,9 +7,10 @@ const initialState = {
   usersLimit: 6,
   fetchData: null,
   postData: {
-    token: null,
+    tokenData: null,
     userData: null
-  }
+  },
+  fetchPosition: null
 };
 
 export const fetchUsers = createAsyncThunk(
@@ -29,16 +30,16 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
-export const fetchToken = createAsyncThunk(
-  'users/fetchToken',
+export const fetchPosition = createAsyncThunk(
+  'users/fetchPosition',
   async function (_, { rejectWithValue }) {
     try {
       const response = await fetch(
-        'https://frontend-test-assignment-api.abz.agency/api/v1/token'
+        'https://frontend-test-assignment-api.abz.agency/api/v1/positions'
       );
       if (!response.ok) throw new Error('Server error');
-      const data = await response.json();
-      return data;
+      const positions = await response.json();
+      return positions;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -47,15 +48,15 @@ export const fetchToken = createAsyncThunk(
 
 export const postNewUser = createAsyncThunk(
   'users/postNewUser',
-  async function (formData, { rejectWithValue }) {
+  async function (action, { rejectWithValue }) {
     try {
       const response = await fetch(
         'https://frontend-test-assignment-api.abz.agency/api/v1/users',
         {
           method: 'POST',
-          body: formData.userData,
+          body: action.formData,
           headers: {
-            Token: formData.token
+            Token: action.token
             //  get token with GET api/v1/token method
           }
         }
@@ -63,6 +64,27 @@ export const postNewUser = createAsyncThunk(
       if (!response.ok) throw new Error('Server error');
 
       const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchToken = createAsyncThunk(
+  'users/fetchToken',
+  async function (formData, { rejectWithValue, dispatch }) {
+    try {
+      const response = await fetch(
+        'https://frontend-test-assignment-api.abz.agency/api/v1/token'
+      );
+      if (!response.ok) throw new Error('Server error');
+      const data = await response.json();
+      const token = data.token;
+      // const action = { token, formData };
+
+      dispatch(postNewUser({ token, formData }));
+
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -107,7 +129,7 @@ export const userSlice = createSlice({
     },
     [fetchToken.fulfilled]: (state, action) => {
       state.status = 'resolved';
-      state.postData.token = action.payload;
+      state.postData.tokenData = action.payload;
       state.error = null;
     },
 
@@ -121,9 +143,20 @@ export const userSlice = createSlice({
       state.error = null;
     },
 
+    [fetchPosition.pending]: (state) => {
+      state.status = 'loading';
+      state.error = null;
+    },
+    [fetchPosition.fulfilled]: (state, action) => {
+      state.status = 'resolved';
+      state.fetchPosition = action.payload;
+      state.error = null;
+    },
+
     [fetchUsers.rejected]: (state, action) => functionRejected(state, action),
     [fetchToken.rejected]: (state, action) => functionRejected(state, action),
-    [postNewUser.rejected]: (state, action) => functionRejected(state, action)
+    [postNewUser.rejected]: (state, action) => functionRejected(state, action),
+    [fetchPosition.rejected]: (state, action) => functionRejected(state, action)
   }
 });
 
@@ -140,3 +173,19 @@ export default userSlice.reducer;
 // getUsers: (state, action) => {
 //   state.usersArray = action.payload;
 // },
+
+// export const fetchToken = createAsyncThunk(
+//   'users/fetchToken',
+//   async function (_, { rejectWithValue }) {
+//     try {
+//       const response = await fetch(
+//         'https://frontend-test-assignment-api.abz.agency/api/v1/token'
+//       );
+//       if (!response.ok) throw new Error('Server error');
+//       const data = await response.json();
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );

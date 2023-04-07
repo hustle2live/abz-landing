@@ -11,7 +11,7 @@
   form {
     border: none;
 
-    .fieldsGroup {
+    .textFieldsGroup {
       margin: 0 auto 8px 0;
       max-width: 380px;
       min-height: 54px;
@@ -46,7 +46,7 @@
   }
 }
 
-.fieldsGroup,
+.textFieldsGroup,
 .inputFileEmement {
   margin: 40px auto;
 }
@@ -81,7 +81,7 @@
 
 @media screen and (max-width: 767px) {
   .registerSection form,
-  .registerSection form .fieldsGroup {
+  .registerSection form .textFieldsGroup {
     max-width: 328px;
     margin: 0 auto;
   }
