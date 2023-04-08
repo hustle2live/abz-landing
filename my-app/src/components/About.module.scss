@@ -63,14 +63,6 @@ button.more {
   }
 }
 
-.truncateText {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  line-height: 26px;
-  height: 26px;
-}
 
 .loadingElement {
   transition: all 5s ease;
@@ -89,9 +81,7 @@ button.more {
     max-width: 904px;
   }
 
-  .truncateText {
-    max-width: 242px;
-  }
+
 }
 
 @media screen and (max-width: 1023px) {
@@ -107,9 +97,7 @@ button.more {
     max-width: 704px;
   }
 
-  .truncateText {
-    max-width: 304px;
-  }
+
 
   button.more {
     margin-top: 34px;
@@ -128,11 +116,11 @@ button.more {
     max-width: 328px;
   }
 
-  .truncateText {
-    max-width: 288px;
-  }
+
 
   button.more {
     margin-top: 30px;
   }
 }
+
+

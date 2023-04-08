@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import {
-  fetchUsers,
-  getUsers,
-  increaseUsersLimit,
-  resetUsersLimit
-} from '../store/userslice';
+import { fetchUsers, increaseUsersLimit } from '../store/userslice';
 
 import mainStyles from '../Styles.module.scss';
 import styles from './About.module.scss';
@@ -15,7 +10,7 @@ import Logo from './assets/photo-cover.svg';
 
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
+import { Typography, InputLabel } from '@mui/material';
 
 // import Photo from './assets/photo-cover.svg';
 
@@ -29,7 +24,7 @@ export const About = () => {
     dispatch(fetchUsers(usersLimit));
   }, [usersLimit]);
 
-  console.log(usersArray);
+  // console.log(usersArray);
 
   const UserCardElement = () =>
     usersArray.length
@@ -38,25 +33,16 @@ export const About = () => {
             <div className={styles.card__image}>
               <img src={photo || Logo} alt={`candidate id ${id}`} />
             </div>
-            <p className={`${styles.card__name} ${styles.truncateText}`}>
-              {name}
-            </p>
+            <InputLabel className={styles.card__name}>{name}</InputLabel>
             <div className={styles.card__description}>
+              <p className={styles.card__description__position}>{position} </p>
               <p
-                className={`${styles.card__description__position} ${styles.truncateText}`}
-              >
-                {position}
-              </p>
-              <p
-                className={`${styles.card__description__email} ${styles.truncateText}`}
+                className={`${styles.card__description__email}  ${mainStyles.tooltip}`}
               >
                 {email}
+                <span className={mainStyles.tooltiptext}>{email} </span>
               </p>
-              <p
-                className={`${styles.card__description__phone} ${styles.truncateText}`}
-              >
-                {phone}
-              </p>
+              <p className={styles.card__description__phone}>{phone}</p>
             </div>
           </div>
         ))
