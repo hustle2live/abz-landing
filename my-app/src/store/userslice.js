@@ -8,9 +8,10 @@ const initialState = {
   fetchData: null,
   postData: {
     tokenData: null,
-    userData: null
+    responseData: null
   },
-  fetchPosition: null
+  fetchPosition: null,
+  successSend: false
 };
 
 export const fetchUsers = createAsyncThunk(
@@ -48,22 +49,24 @@ export const fetchPosition = createAsyncThunk(
 
 export const postNewUser = createAsyncThunk(
   'users/postNewUser',
-  async function (action, { rejectWithValue }) {
+  async function (action, { rejectWithValue, dispatch }) {
     try {
-      const response = await fetch(
+      const userResponse = await fetch(
         'https://frontend-test-assignment-api.abz.agency/api/v1/users',
         {
           method: 'POST',
           body: action.formData,
           headers: {
             Token: action.token
-            //  get token with GET api/v1/token method
           }
         }
       );
-      if (!response.ok) throw new Error('Server error');
+      if (!userResponse.ok) throw new Error('Server error');
+      const data = await userResponse.json();
+      console.log(data);
 
-      const data = await response.json();
+      dispatch(fetchUsers());
+
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -75,17 +78,21 @@ export const fetchToken = createAsyncThunk(
   'users/fetchToken',
   async function (formData, { rejectWithValue, dispatch }) {
     try {
-      const response = await fetch(
-        'https://frontend-test-assignment-api.abz.agency/api/v1/token'
-      );
-      if (!response.ok) throw new Error('Server error');
-      const data = await response.json();
-      const token = data.token;
-      // const action = { token, formData };
+      fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
+        .then(function (response) {
+          if (!response.ok) throw new Error('Server error');
 
-      dispatch(postNewUser({ token, formData }));
-
-      return data;
+          return response.json();
+        })
+        .then(function (data) {
+          const token = data.token;
+          const action = { token, formData };
+          dispatch(postNewUser(action));
+          return data;
+        })
+        .catch(function (error) {
+          return rejectWithValue(error.message);
+        });
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -107,9 +114,6 @@ export const userSlice = createSlice({
     resetUsersLimit: (state) => {
       state.usersLimit = 6;
     }
-    // getUsers: (state, action) => {
-    //   state.usersArray = action.payload;
-    // },
   },
   extraReducers: {
     [fetchUsers.pending]: (state) => {
@@ -128,7 +132,7 @@ export const userSlice = createSlice({
       state.error = null;
     },
     [fetchToken.fulfilled]: (state, action) => {
-      state.status = 'resolved';
+      state.status = 'loading';
       state.postData.tokenData = action.payload;
       state.error = null;
     },
@@ -139,8 +143,10 @@ export const userSlice = createSlice({
     },
     [postNewUser.fulfilled]: (state, action) => {
       state.status = 'resolved';
-      state.postData.userData = action.payload;
+      state.postData.responseData = action.payload;
+      state.successSend = action.payload.success;
       state.error = null;
+      state.usersLimit = 6;
     },
 
     [fetchPosition.pending]: (state) => {
@@ -163,29 +169,3 @@ export const userSlice = createSlice({
 export const { increaseUsersLimit, resetUsersLimit } = userSlice.actions;
 
 export default userSlice.reducer;
-
-// export const { getUsers, removeUser, increaseUsersLimit } = newsSlice.actions;
-
-// state.newsArray = state.removed.length
-//   ? filteringUsersState(action.payload, state.removed)
-//   : action.payload;
-
-// getUsers: (state, action) => {
-//   state.usersArray = action.payload;
-// },
-
-// export const fetchToken = createAsyncThunk(
-//   'users/fetchToken',
-//   async function (_, { rejectWithValue }) {
-//     try {
-//       const response = await fetch(
-//         'https://frontend-test-assignment-api.abz.agency/api/v1/token'
-//       );
-//       if (!response.ok) throw new Error('Server error');
-//       const data = await response.json();
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
