@@ -26,6 +26,7 @@ h3 {
   font-weight: 400;
 }
 
+input[type='submit'],
 button {
   font-family: 'Nunito', sans-serif;
   font-style: normal;
@@ -49,6 +50,7 @@ button {
   }
 
   &.disabled {
+    display: block;
     background: #b4b4b4;
     color: rgba(255, 255, 255, 0.87);
 
@@ -58,6 +60,21 @@ button {
     }
   }
 }
+
+input[type='file'] {
+  border: none;
+  color: transparent;
+  width: 1px;
+
+  &::file-selector-button {
+    visibility: hidden;
+  }
+}
+
+.invalid {
+  border: 2px solid #cb3d40;
+}
+
 
 @media screen and (max-width: 767px) {
   h2,

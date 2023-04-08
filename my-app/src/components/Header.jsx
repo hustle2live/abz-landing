@@ -10,7 +10,7 @@ export const Header = () => {
       <div className={headStyles.topBar}>
         <div className={headStyles.topBarContainer}>
           <div className={headStyles.logoElement}>
-            <a href='#asdasd'>
+            <a href='#'>
               <img src={Logo} alt='logo svg' />
             </a>
           </div>

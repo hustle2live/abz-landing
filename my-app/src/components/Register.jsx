@@ -19,6 +19,10 @@ import { fetchToken, postNewUser, fetchPosition } from '../store/userslice';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 
+import InputLabel from '@mui/material/InputLabel';
+
+import { useForm } from 'react-hook-form';
+
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
     color: '#7E7E7E'
@@ -39,8 +43,8 @@ const CssTextField = styled(TextField)({
   }
 });
 
-const CssIconButton = styled(IconButton)({
-  '&.MuiButtonBase-root': {
+const CssCustomInputLabel = styled(InputLabel)({
+  '&.MuiInputLabel-root': {
     fontFamily: "'Nunito', sans-serif",
     fontStyle: 'normal',
     fontWeight: '400',
@@ -51,11 +55,24 @@ const CssIconButton = styled(IconButton)({
     border: '1px solid rgba(0, 0, 0, 0.87)',
     borderRadius: '4px 0 0 4px',
     boxSizing: 'border-box',
-    maxHeight: '54px'
+    maxHeight: '54px',
+    minWidth: '83px'
   },
-  '&.MuiButtonBase-root button': {
-    boxSizing: 'border-box',
-    maxHeight: '54px'
+  '&.Mui-error': {
+    border: '2px solid #CB3D40'
+  }
+});
+
+const CssCustomOutlinedInput = styled(OutlinedInput)({
+  '&.MuiOutlinedInput-root': {
+    border: '1px solid #d0cfcf',
+    borderRadius: '0 4px 4px 0',
+    color: '#7E7E7E',
+    zIndex: '-1'
+  },
+  '&.Mui-error': {
+    border: '2px solid #CB3D40',
+    color: '#7E7E7E'
   }
 });
 
@@ -70,75 +87,74 @@ const CssRadioButton = styled(Radio)({
 });
 
 export const Register = () => {
-  const store = useSelector((state) => state);
   const dispatch = useDispatch();
-  // console.log(store);
-  // ----------------------------------------------
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [photo, setPhoto] = useState('');
-  const [position, setPosition] = useState('');
+  const [position, setPosition] = useState(1);
 
-  function clearForm() {
+  // const [error, setError] = useState(null);
+
+  const clearForm = () => {
     setName('');
     setEmail('');
     setPhone('');
     setPhoto('');
-    setPosition('');
-  }
-
-  const newUser = {
-    position_id: position,
-    name: name,
-    email: email,
-    phone: phone,
-    photo: photo
+    setPosition(1);
   };
 
-  function handleSubmit(event) {
-    event.preventDefault();
-
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append('position_id', position);
     formData.append('name', name);
     formData.append('email', email);
     formData.append('phone', phone);
     formData.append('photo', photo);
-
-    console.log(newUser);
-
+    console.group({
+      position_id: position,
+      name: name,
+      email: email,
+      phone: phone,
+      photo: photo
+    });
     // dispatch(fetchToken(formData));
-
     return clearForm();
-  }
+  };
 
-  function validateName(e) {
+  const validateName = (e) => {
+    e.preventDefault();
     const re = /^[a-z а-яёЁЇїІіЄєҐґ ,.'-]+$/i;
     if (e.target.value === '' || re.test(e.target.value))
       return setName(e.target.value);
-  }
+  };
 
-  function validateEmail(e) {
+  const validateEmail = (e) => {
+    e.preventDefault();
     const re = /^[a-z 0-9 .@-_]+$/i;
     if (e.target.value === '' || re.test(e.target.value))
       return setEmail(e.target.value);
-  }
+  };
 
-  function validatePhone(e) {
+  const validatePhone = (e) => {
+    e.preventDefault();
     const re = /^[\+\d]*$/;
     if (e.target.value === '' || re.test(e.target.value))
       return setPhone(e.target.value);
-  }
+  };
 
-  function handlePosition(e) {
+  const handlePosition = (e) => {
+    e.preventDefault();
     return setPosition(e.target.value);
-  }
+  };
 
-  function handlePhoto(e) {
+  const handlePhoto = (e) => {
+    e.preventDefault();
     if (e.target.files[0]) return setPhoto(e.target.files[0]);
     return setPhoto('');
-  }
+  };
 
   return (
     <section
@@ -146,7 +162,11 @@ export const Register = () => {
     >
       <h3 className={styles.sectionTitle}>Working with POST request</h3>
       <div className={styles.registerSection}>
-        <form method='post' enctype='multipart/form-data'>
+        <form
+          method='post'
+          encType='multipart/form-data'
+          onSubmit={handleFormSubmit}
+        >
           <div className={styles.textFieldsGroup}>
             <CssTextField
               className={styles.textField}
@@ -154,6 +174,13 @@ export const Register = () => {
               variant='outlined'
               value={name}
               onChange={(e) => validateName(e)}
+              required
+              inputProps={{
+                minLength: 2,
+                maxLength: 60
+              }}
+              error={name === ''}
+              helperText={name === '' ? 'Empty field!' : ' '}
             />
             <CssTextField
               className={styles.textField}
@@ -161,6 +188,9 @@ export const Register = () => {
               variant='outlined'
               value={email}
               onChange={(e) => validateEmail(e)}
+              required
+              error={email === ''}
+              helperText={email === '' ? 'Empty field!' : ' '}
             />
             <CssTextField
               className={`${styles.textField} ${styles.phone}`}
@@ -169,22 +199,22 @@ export const Register = () => {
               variant='outlined'
               value={phone}
               onChange={(e) => validatePhone(e)}
+              required
+              error={phone === ''}
             />
           </div>
           <div className={styles.radioGroup}>
             <FormControl>
-              <FormLabel
-                id='demo-radio-buttons-group-label'
-                className={styles.radioGroupTitle}
-              >
+              <FormLabel className={styles.radioGroupTitle}>
                 Select your position
               </FormLabel>
               <RadioGroup
-                defaultValue={3}
+                defaultValue={position}
                 name='radio-buttons-group'
                 color='#000'
                 value={position}
                 onChange={handlePosition}
+                required
               >
                 <FormControlLabel
                   value={1}
@@ -214,19 +244,19 @@ export const Register = () => {
             </FormControl>
           </div>
           <div className={styles.inputFileEmement}>
-            <CssIconButton component='label'>
+            <CssCustomInputLabel error={photo === ''}>
               Upload
               <input
-                hidden
+                className={styles.uploadButton}
                 accept='image/jpg, image/jpeg'
                 type='file'
                 name='image_upload'
                 onChange={(e) => handlePhoto(e)}
+                required
               />
-            </CssIconButton>
-            <OutlinedInput
+            </CssCustomInputLabel>
+            <CssCustomOutlinedInput
               className={styles.fileInput}
-              disabled
               value={
                 photo
                   ? [...photo.name]
@@ -236,123 +266,55 @@ export const Register = () => {
                       .join('')
                   : 'Upload your photo'
               }
+              error={photo === ''}
             />
           </div>
+          <input
+            type='submit'
+            className={mainStyles.disabled}
+            value={'Sign up'}
+          />
         </form>
       </div>
-      <button className={mainStyles.disabled} onClick={(e) => handleSubmit(e)}>
-        Sing up
-      </button>
     </section>
   );
 };
 
-// const InputOutlined = (props) => {
-//   const fileName = props.file ? props.file.name : 'chose Fiole sad sd';
-//   return (
-//     <OutlinedInput className={styles.fileInput} disabled value={fileName} />
-//   );
+// onSubmit={handleSubmit(onSubmit)}
+
+// {
+//   /* <input
+//             type='submit'
+//             value='Sing up'
+//             className={mainStyles.disabled}
+//             onClick={(e) => handleFormSubmit(e)}
+//             // onSubmit={(e) => handleFormSubmit(e)}
+//           /> */
+// }
+
+// const {
+//   register,
+//   handleSubmit,
+//   watch,
+//   setError,
+//   formState: { errors }
+// } = useForm();
+
+// const onSubmit = (data) => console.log(data);
+
+// console.log(watch('example'));
+
+// const newUser = {
+//   position_id: position,
+//   name: name,
+//   email: email,
+//   phone: phone,
+//   photo: photo
 // };
 
-// const [value, setValue] = React.useState('female');
-
-// const handleChange = (event) => {
-//   setValue(event.target.value);
-// };
-
-//------------------------------------------
-
-// const RadioButtonsGroup = () => (
-//   <FormControl className={styles.radioGroup}>
-//     <FormLabel
-//       id='demo-radio-buttons-group-label'
-//       className={styles.radioGroupTitle}
-//     >
-//       Select your position
-//     </FormLabel>
-//     <RadioGroup
-//       defaultValue='backend'
-//       name='radio-buttons-group'
-//       color='#000'
-//       value={position}
-//       onChange={(e) => handlePosition(e)}
-//     >
-//       <FormControlLabel
-//         value={1}
-//         control={<CssRadioButton />}
-//         label='Frontend developer'
-//         className={styles.radioGroupElement}
-//       />
-//       <FormControlLabel
-//         value={2}
-//         control={<CssRadioButton />}
-//         label='Backend Developer'
-//         className={styles.radioGroupElement}
-//       />
-//       <FormControlLabel
-//         value={3}
-//         control={<CssRadioButton />}
-//         label='Designer'
-//         className={styles.radioGroupElement}
-//       />
-//       <FormControlLabel
-//         value={4}
-//         control={<CssRadioButton />}
-//         label='QA'
-//         className={styles.radioGroupElement}
-//       />
-//     </RadioGroup>
-//   </FormControl>
-// );
-
-// const TextFieldsGroup = () => (
-//   <div className={styles.textFieldsGroup}>
-//     <CssTextField
-//       className={styles.textField}
-//       label='Your Name'
-//       variant='outlined'
-//       value={name}
-//       onChange={(e) => validateName(e)}
-//     />
-//     <CssTextField
-//       className={styles.textField}
-//       label='Email'
-//       variant='outlined'
-//       value={email}
-//       onChange={(e) => validateEmail(e)}
-//     />
-//     <CssTextField
-//       className={`${styles.textField} ${styles.phone}`}
-//       id='phone'
-//       label='Phone'
-//       variant='outlined'
-//       value={phone}
-//       onChange={(e) => validatePhone(e)}
-//     />
-//   </div>
-// );
-
-// const UploadInputField = () => (
-//   <div className={styles.inputFileEmement}>
-//     <CssIconButton component='label'>
-//       Upload
-//       <input
-//         hidden
-//         accept='image/jpg, image/jpeg'
-//         type='file'
-//         onChange={(e) => handlePhoto(e)}
-//       />
-//     </CssIconButton>
-//     <OutlinedInput
-//       className={styles.fileInput}
-//       disabled
-//       value='Upload your photo'
-//     />
-//   </div>
-// );
-
-// const formDataHandler = (e) => {
-//   e.preventDefault();
-//   dispatch(fetchToken());
-//   return false;
-// };
+// <button
+//   className={mainStyles.disabled}
+//   onClick={(e) => handleFormSubmit(e)}
+// >
+//   Sing up
+// </button>
