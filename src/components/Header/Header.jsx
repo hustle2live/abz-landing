@@ -1,5 +1,5 @@
-import mainStyles from '../../styles/styles.module.scss';
-import headStyles from '../Header/Header.module.scss';
+import global from '../../styles/global.module.scss';
+import styles from '../Header/Header.module.scss';
 
 import Logo from '../../assets/Logo.svg';
 import BackgroundImage from '../../assets/pexels-alexandr-podvalny-1227513.jpeg';
@@ -7,21 +7,21 @@ import BackgroundImage from '../../assets/pexels-alexandr-podvalny-1227513.jpeg'
 export const Header = () => {
   return (
     <header>
-      <div className={headStyles.topBar}>
-        <div className={headStyles.topBarContainer}>
-          <div className={headStyles.logoElement}>
+      <div className={styles.topBar}>
+        <div className={styles.topBarContainer}>
+          <div className={styles.logoElement}>
             <a href='#'>
               <img src={Logo} alt='logo svg' />
             </a>
           </div>
-          <div className={headStyles.topButtons}>
-            <button className={mainStyles.primary}>Users</button>
-            <button className={mainStyles.primary}>Sing up</button>
+          <div className={styles.topButtons}>
+            <button className={global.primary}>Users</button>
+            <button className={global.primary}>Sing up</button>
           </div>
         </div>
       </div>
-      <div className={headStyles.mainSection}>
-        <div className={headStyles.backgroundImage}>
+      <div className={styles.mainSection}>
+        <div className={styles.backgroundImage}>
           <img
             src={BackgroundImage}
             alt='wheat field and blue sky as Ukraine freedom'
@@ -35,7 +35,7 @@ export const Header = () => {
           mind. They should also be excited to learn, as the world of Front-End
           Development keeps evolving.
         </p>
-        <button className={mainStyles.primary}>Sing Up</button>
+        <button className={global.primary}>Sing Up</button>
       </div>
     </header>
   );

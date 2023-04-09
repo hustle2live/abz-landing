@@ -6,34 +6,47 @@ body {
 }
 
 body,
-p {
+p,
+a,
+h1,
+h2,
+h3,
+input,
+label,
+button,
+.tooltip .tooltiptext {
   font-family: 'Nunito', sans-serif;
+  font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
+  color: rgba(0, 0, 0, 0.87)
 }
 
 h1,
 h2,
 h3 {
-  text-align: center;
   font-size: 40px;
   line-height: 40px;
-  font-weight: 400;
+  text-align: center;
+}
+
+.container {
+  max-width: 1170px;
+  display: flex;
+  flex-direction: column;
+  margin: 140px auto 100px;
+  align-items: center;
 }
 
 input[type='submit'],
 button {
-  font-family: 'Nunito', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  padding: 4px 20px;
-  margin: auto;
-  border-radius: 80px;
-  border: none;
   min-width: 100px;
   height: 34px;
+  padding: 4px 20px;
+  border-radius: 80px;
+  border: none;
+  margin: auto;
   cursor: pointer;
 
   &.primary {
@@ -58,9 +71,10 @@ button {
 }
 
 input[type='file'] {
-  border: none;
   color: transparent;
   width: 1px;
+  border: none;
+
 
   &::file-selector-button {
     visibility: hidden;
@@ -83,26 +97,37 @@ input[type='file'] {
 .tooltip .tooltiptext {
   visibility: hidden;
   position: absolute;
-  font-family: 'Nunito';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
   color: #ffffff;
   text-align: center;
   background: rgba(0, 0, 0, 0.87);
   padding: 3px 16px;
   border-radius: 4px;
-  z-index: 1;
   top: 30px;
   left: 50%;
+  z-index: 1;
 }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
 
+@media screen and (max-width: 1170px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
 @media screen and (max-width: 767px) {
+  .container {
+    max-width: 360px;
+  }
+
   h2,
   h3 {
     max-width: 328px;

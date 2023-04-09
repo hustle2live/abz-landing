@@ -1,10 +1,5 @@
-.registerMainContainer {
-  justify-content: flex-start;
-  margin-bottom: 100px;
-}
-
 .sectionTitle {
-  margin-top: 0;
+  margin-top: 40px;
 }
 
 .registerSection {
@@ -29,9 +24,6 @@
         display: block;
         position: absolute;
         content: '+38 (XXX) XXX - XX - XX';
-        font-family: 'Nunito';
-        font-style: normal;
-        font-weight: 400;
         font-size: 12px;
         line-height: 18px;
         color: #7e7e7e;

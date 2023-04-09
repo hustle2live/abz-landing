@@ -2,12 +2,11 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchUsers, increaseUsersLimit } from '../../store/userslice';
-
-import mainStyles from '../../styles/styles.module.scss';
+import global from '../../styles/global.module.scss';
 import styles from './Candidates.module.scss';
 import Logo from '../../assets/photo-cover.svg';
 
+import { fetchUsers, increaseUsersLimit } from '../../store/userslice';
 import { Box, Typography, InputLabel, CircularProgress } from '@mui/material';
 
 export const Candidates = () => {
@@ -31,11 +30,11 @@ export const Candidates = () => {
             <div className={styles.card__description}>
               <p className={styles.card__description__position}>{position} </p>
               <p
-                className={`${styles.card__description__email}  ${mainStyles.tooltip}`}
+                className={`${styles.card__description__email}  ${global.tooltip}`}
               >
                 <InputLabel>{email}</InputLabel>
 
-                <span className={mainStyles.tooltiptext}>{email} </span>
+                <span className={global.tooltiptext}>{email} </span>
               </p>
               <p className={styles.card__description__phone}>{phone}</p>
             </div>
@@ -49,22 +48,22 @@ export const Candidates = () => {
     </Box>
   );
 
-  const ErrorMessage = () => (
+  const ErrorMessage = (props) => (
     <Typography variant='h4' component='p'>
-      An error occured : {error}
+      An error occured : {props.error}
     </Typography>
   );
 
   return (
-    <section className={styles.container}>
+    <section className={global.container}>
       <h2>Working with GET request</h2>
       <div className={styles.cardSection}>
         <UserCardElement />
       </div>
       {status === 'loading' && <LoadingElement />}
-      {error && <ErrorMessage />}
+      {error && <ErrorMessage error={error} />}
       <button
-        className={`${styles.more} ${mainStyles.primary}`}
+        className={`${styles.more} ${global.primary}`}
         onClick={() => dispatch(increaseUsersLimit())}
       >
         Show more

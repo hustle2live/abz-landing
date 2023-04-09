@@ -4,85 +4,21 @@ import { useDispatch } from 'react-redux';
 import { fetchToken } from '../../store/userslice';
 
 import styles from './Register.module.scss';
-import aboutStyles from '../Candidates/Candidates.module.scss';
-import mainStyles from '../../styles/styles.module.scss';
-
-import { styled } from '@mui/material/styles';
+import global from '../../styles/global.module.scss';
 
 import {
-  TextField,
-  Radio,
   RadioGroup,
   FormControlLabel,
   FormControl,
-  FormLabel,
-  OutlinedInput,
-  InputLabel
+  FormLabel
 } from '@mui/material';
 
-const CssTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: '#7E7E7E'
-  },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: '#D0CFCF'
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: '#D0CFCF'
-    },
-    '&:hover fieldset': {
-      borderColor: '#D0CFCF'
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: '#D0CFCF'
-      // border: '2px solid #CB3D40'
-    }
-  }
-});
-
-const CssCustomInputLabel = styled(InputLabel)({
-  '&.MuiInputLabel-root': {
-    fontFamily: "'Nunito', sans-serif",
-    fontStyle: 'normal',
-    fontWeight: '400',
-    fontSize: '16px',
-    color: 'rgba(0, 0, 0, 0.87)',
-    lineHeight: '26px',
-    padding: '14px 15px',
-    border: '1px solid rgba(0, 0, 0, 0.87)',
-    borderRadius: '4px 0 0 4px',
-    boxSizing: 'border-box',
-    maxHeight: '54px',
-    minWidth: '83px'
-  },
-  '&.Mui-error': {
-    border: '2px solid #CB3D40'
-  }
-});
-
-const CssCustomOutlinedInput = styled(OutlinedInput)({
-  '&.MuiOutlinedInput-root': {
-    border: '1px solid #d0cfcf',
-    borderRadius: '0 4px 4px 0',
-    color: '#7E7E7E',
-    zIndex: '-1'
-  },
-  '&.Mui-error': {
-    border: '2px solid #CB3D40',
-    color: '#7E7E7E'
-  }
-});
-
-const CssRadioButton = styled(Radio)({
-  '&.MuiRadio-root': {
-    color: '#D0CFCF',
-    height: '34px'
-  },
-  '&.Mui-checked': {
-    color: '#00BDD3'
-  }
-});
+import {
+  CssTextField,
+  CssRadioButton,
+  CssCustomInputLabel,
+  CssCustomOutlinedInput
+} from '../../styles/styledComponentsMUI';
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -147,9 +83,7 @@ export const Register = () => {
   };
 
   return (
-    <section
-      className={`${aboutStyles.container} ${styles.registerMainContainer}`}
-    >
+    <section className={global.container}>
       <h3 className={styles.sectionTitle}>Working with POST request</h3>
       <div className={styles.registerSection}>
         <form
@@ -259,11 +193,7 @@ export const Register = () => {
               error={!photo === null}
             />
           </div>
-          <input
-            type='submit'
-            className={mainStyles.disabled}
-            value={'Sign up'}
-          />
+          <input type='submit' className={global.disabled} value={'Sign up'} />
         </form>
       </div>
     </section>
