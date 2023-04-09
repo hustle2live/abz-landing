@@ -45,8 +45,8 @@ export const CssTextField = styled(TextField)({
     '&:hover fieldset': {
       borderColor: '#D0CFCF'
     },
-    '&.Mui-focused fieldset': {
-      borderColor: '#D0CFCF'
+    '&.Mui-error fieldset': {
+      border: '2px solid #CB3D40'
     }
   }
 });

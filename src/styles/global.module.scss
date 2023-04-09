@@ -20,7 +20,7 @@ button,
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
-  color: rgba(0, 0, 0, 0.87)
+  color: rgba(0, 0, 0, 0.87);
 }
 
 h1,
@@ -74,7 +74,6 @@ input[type='file'] {
   color: transparent;
   width: 1px;
   border: none;
-
 
   &::file-selector-button {
     visibility: hidden;

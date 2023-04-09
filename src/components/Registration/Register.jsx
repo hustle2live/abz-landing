@@ -5,6 +5,12 @@ import { fetchToken } from '../../store/userslice';
 
 import styles from './Register.module.scss';
 import global from '../../styles/global.module.scss';
+import {
+  cutElementsName,
+  regExpName,
+  regExpEmail,
+  regExpPhone
+} from '../../features/helpers.js';
 
 import {
   RadioGroup,
@@ -49,38 +55,25 @@ export const Register = () => {
     dispatch(fetchToken(formData));
     return clearForm;
   };
-
   const validateName = (e) => {
     e.preventDefault();
-    const re = /^[a-z а-яёЁЇїІіЄєҐґ ,.'-]+$/i;
-    if (e.target.value === '' || re.test(e.target.value))
+    if (e.target.value === '' || regExpName.test(e.target.value))
       return setName(e.target.value);
   };
-
   const validateEmail = (e) => {
     e.preventDefault();
-    const re = /^[a-z 0-9 .@-_]+$/i;
-    if (e.target.value === '' || re.test(e.target.value))
+    if (e.target.value === '' || regExpEmail.test(e.target.value))
       return setEmail(e.target.value);
   };
-
   const validatePhone = (e) => {
     e.preventDefault();
-    const re = /^[\+\d]*$/;
-    if (e.target.value === '' || re.test(e.target.value))
+    if (e.target.value === '' || regExpPhone.test(e.target.value))
       return setPhone(e.target.value);
   };
+  const handlePosition = (e) => setPosition(e.target.value);
 
-  const handlePosition = (e) => {
-    e.preventDefault();
-    return setPosition(e.target.value);
-  };
-
-  const handlePhoto = (e) => {
-    e.preventDefault();
-    if (e.target.files[0]) return setPhoto(e.target.files[0]);
-    return setPhoto(null);
-  };
+  const handlePhoto = (e) =>
+    setPhoto(e.target.files[0] ? e.target.files[0] : null);
 
   return (
     <section className={global.container}>
@@ -94,17 +87,20 @@ export const Register = () => {
           <div className={styles.textFieldsGroup}>
             <CssTextField
               className={styles.textField}
-              label='Your Name'
               variant='outlined'
+              label='Your name'
               value={name}
               onChange={(e) => validateName(e)}
-              required
               inputProps={{
                 minLength: 2,
                 maxLength: 60
               }}
               error={name.length < 2 || name.length > 60}
               helperText={name === '' ? 'Empty field!' : ' '}
+              InputLabelProps={{
+                required: false
+              }}
+              required
             />
             <CssTextField
               className={styles.textField}
@@ -115,6 +111,9 @@ export const Register = () => {
               required
               error={!(email.includes('@') && email.includes('.'))}
               helperText={email === '' ? 'Empty field!' : ' '}
+              InputLabelProps={{
+                required: false
+              }}
             />
             <CssTextField
               className={`${styles.textField} ${styles.phone}`}
@@ -125,6 +124,9 @@ export const Register = () => {
               onChange={(e) => validatePhone(e)}
               required
               error={!phone.includes('+380')}
+              InputLabelProps={{
+                required: false
+              }}
             />
           </div>
           <div className={styles.radioGroup}>
@@ -181,15 +183,7 @@ export const Register = () => {
             </CssCustomInputLabel>
             <CssCustomOutlinedInput
               className={styles.fileInput}
-              value={
-                photo
-                  ? [...photo.name]
-                      .slice(0, 24)
-                      .slice(0, -4)
-                      .concat('... ' + [...photo.name].slice(-4).join(''))
-                      .join('')
-                  : 'Upload your photo'
-              }
+              value={photo ? cutElementsName(photo) : 'Upload your photo'}
               error={!photo === null}
             />
           </div>
