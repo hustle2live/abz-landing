@@ -1,24 +1,24 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchToken } from '../../store/userslice';
 
 import styles from './Register.module.scss';
-import aboutStyles from './About.module.scss';
-import mainStyles from '../Styles.module.scss';
+import aboutStyles from '../Candidates/Candidates.module.scss';
+import mainStyles from '../../styles/styles.module.scss';
 
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import { styled } from '@mui/material/styles';
 
-import OutlinedInput from '@mui/material/OutlinedInput';
-
-import { fetchToken } from '../store/userslice';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
-
-import InputLabel from '@mui/material/InputLabel';
+import {
+  TextField,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+  OutlinedInput,
+  InputLabel
+} from '@mui/material';
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -109,13 +109,7 @@ export const Register = () => {
     formData.append('email', email);
     formData.append('phone', phone);
     formData.append('photo', photo);
-    console.group({
-      position_id: position,
-      name: name,
-      email: email,
-      phone: phone,
-      photo: photo
-    });
+
     dispatch(fetchToken(formData));
     return clearForm;
   };

@@ -1,11 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-$bg-yellow: #f4e041;
-$bg-blue: #00bdd3;
-$bg-light-gray: #f8f8f8;
-
 body {
-  background: $bg-light-gray;
+  background: #f8f8f8;
   margin: 0;
 }
 
@@ -42,7 +38,7 @@ button {
 
   &.primary {
     color: rgba(0, 0, 0, 0.87);
-    background: $bg-yellow;
+    background: #f4e041;
 
     &:hover {
       background: #ffe302;
@@ -92,7 +88,7 @@ input[type='file'] {
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   background: rgba(0, 0, 0, 0.87);
   padding: 3px 16px;
@@ -112,4 +108,3 @@ input[type='file'] {
     max-width: 328px;
   }
 }
-

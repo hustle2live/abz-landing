@@ -1,7 +1,7 @@
 import styles from './RegisterMessage.module.scss';
-import SuccessImage from './assets/success-image.svg';
+import SuccessImage from '../../assets/success-image.svg';
 
-export const RegisterMessage = () => (
+export const SuccessMessage = () => (
   <div className={styles.register__message}>
     <p className={styles.register__message__text}>
       User successfully registered

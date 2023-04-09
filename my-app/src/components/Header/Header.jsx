@@ -1,8 +1,8 @@
-import mainStyles from '../Styles.module.scss';
-import headStyles from './Header.module.scss';
+import mainStyles from '../../styles/styles.module.scss';
+import headStyles from '../Header/Header.module.scss';
 
-import Logo from './assets/Logo.svg';
-import BackgroundImage from './assets/pexels-alexandr-podvalny-1227513.jpeg';
+import Logo from '../../assets/Logo.svg';
+import BackgroundImage from '../../assets/pexels-alexandr-podvalny-1227513.jpeg';
 
 export const Header = () => {
   return (

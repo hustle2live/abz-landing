@@ -1,20 +1,16 @@
 import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchUsers, increaseUsersLimit } from '../store/userslice';
+import { useSelector, useDispatch } from 'react-redux';
 
-import mainStyles from '../Styles.module.scss';
-import styles from './About.module.scss';
+import { fetchUsers, increaseUsersLimit } from '../../store/userslice';
 
-import Logo from './assets/photo-cover.svg';
+import mainStyles from '../../styles/styles.module.scss';
+import styles from './Candidates.module.scss';
+import Logo from '../../assets/photo-cover.svg';
 
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import { Typography, InputLabel } from '@mui/material';
+import { Box, Typography, InputLabel, CircularProgress } from '@mui/material';
 
-// import Photo from './assets/photo-cover.svg';
-
-export const About = () => {
+export const Candidates = () => {
   const { status, error, usersArray, usersLimit } = useSelector(
     (state) => state
   );
@@ -23,8 +19,6 @@ export const About = () => {
   useEffect(() => {
     dispatch(fetchUsers(usersLimit));
   }, [usersLimit]);
-
-  // console.log(usersArray);
 
   const UserCardElement = () =>
     usersArray.length
@@ -39,7 +33,8 @@ export const About = () => {
               <p
                 className={`${styles.card__description__email}  ${mainStyles.tooltip}`}
               >
-                {email}
+                <InputLabel>{email}</InputLabel>
+
                 <span className={mainStyles.tooltiptext}>{email} </span>
               </p>
               <p className={styles.card__description__phone}>{phone}</p>
