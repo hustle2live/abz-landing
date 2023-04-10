@@ -2,7 +2,7 @@ import global from '../../styles/global.module.scss';
 import styles from '../Header/Header.module.scss';
 
 import Logo from '../../assets/Logo.svg';
-import BackgroundImage from '../../assets/pexels-alexandr-podvalny-1227513.jpeg';
+import BackgroundImage from '../../assets/tyned_pexels-alexandr-podvalny.jpeg';
 
 export const Header = () => {
   return (

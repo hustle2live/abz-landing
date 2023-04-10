@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+const usersStartingLimit = 6;
+
 const initialState = {
   usersArray: [],
   status: null,
   error: null,
-  usersLimit: 6,
+  usersLimit: usersStartingLimit,
   fetchData: null,
   postData: {
     tokenData: null,
@@ -16,7 +18,7 @@ const initialState = {
 
 export const fetchUsers = createAsyncThunk(
   'users/fetchUsers',
-  async function (limit = 6, { rejectWithValue }) {
+  async function (limit = usersStartingLimit, { rejectWithValue }) {
     try {
       const response = await fetch(
         `https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=${limit}`
@@ -112,7 +114,7 @@ export const userSlice = createSlice({
       state.usersLimit = state.usersLimit + 3;
     },
     resetUsersLimit: (state) => {
-      state.usersLimit = 6;
+      state.usersLimit = usersStartingLimit;
     }
   },
   extraReducers: {
