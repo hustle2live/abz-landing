@@ -1,6 +1,6 @@
 # Hello,
 
-#### This is the Test task is performed exclusively for the customer company. Will be deleted after review
+#### This test task is completed only for the customer company and will be deleted after a review
 
 
 ## Used technologies:
