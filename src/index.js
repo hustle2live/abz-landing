@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
+import './styles/global.module.scss';
+import './index.css';
+
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';

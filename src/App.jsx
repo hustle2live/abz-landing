@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import './styles/global.module.scss';
 
 import { Candidates } from './components/Candidates/Candidates';
 import { Header } from './components/Header/Header';

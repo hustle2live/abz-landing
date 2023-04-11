@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchToken } from '../../store/userslice';
 
@@ -7,7 +6,6 @@ import styles from './Register.module.scss';
 import global from '../../styles/global.module.scss';
 import {
   cutElementsName,
-  regExpName,
   regExpEmail,
   regExpPhone
 } from '../../features/helpers.js';
@@ -26,54 +24,31 @@ import {
   CssCustomOutlinedInput
 } from '../../styles/styledComponentsMUI';
 
+import { useForm } from 'react-hook-form';
+
 export const Register = () => {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [photo, setPhoto] = useState(null);
-  const [position, setPosition] = useState(1);
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    getValues
+  } = useForm({
+    mode: 'onTouched'
+  });
+  const userFiles = getValues('userFile');
+  const userFilesDidUpload = () => userFiles && userFiles.length === 1;
 
-  const clearForm = () => {
-    setName('');
-    setEmail('');
-    setPhone('');
-    setPhoto(null);
-    setPosition(1);
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
     const formData = new FormData();
-    formData.append('position_id', position);
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('phone', phone);
-    formData.append('photo', photo);
-
-    dispatch(fetchToken(formData));
-    return clearForm;
+    formData.append('position_id', data.userPosition);
+    formData.append('name', data.userName);
+    formData.append('email', data.userEmail);
+    formData.append('phone', data.userPhone);
+    formData.append('photo', data.userFile[0]);
+    return dispatch(fetchToken(formData));
   };
-  const validateName = (e) => {
-    e.preventDefault();
-    if (e.target.value === '' || regExpName.test(e.target.value))
-      return setName(e.target.value);
-  };
-  const validateEmail = (e) => {
-    e.preventDefault();
-    if (e.target.value === '' || regExpEmail.test(e.target.value))
-      return setEmail(e.target.value);
-  };
-  const validatePhone = (e) => {
-    e.preventDefault();
-    if (e.target.value === '' || regExpPhone.test(e.target.value))
-      return setPhone(e.target.value);
-  };
-  const handlePosition = (e) => setPosition(e.target.value);
-
-  const handlePhoto = (e) =>
-    setPhoto(e.target.files[0] ? e.target.files[0] : null);
 
   return (
     <section className={global.container}>
@@ -82,51 +57,65 @@ export const Register = () => {
         <form
           method='post'
           encType='multipart/form-data'
-          onSubmit={handleFormSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className={styles.textFieldsGroup}>
             <CssTextField
               className={styles.textField}
               variant='outlined'
               label='Your name'
-              value={name}
-              onChange={(e) => validateName(e)}
-              inputProps={{
-                minLength: 2,
-                maxLength: 60
-              }}
-              error={name.length < 2 || name.length > 60}
-              helperText={name === '' ? 'Empty field!' : ' '}
-              InputLabelProps={{
-                required: false
-              }}
+              {...register('userName', {
+                required: 'Empty field!',
+                minLength: {
+                  value: 2,
+                  message: 'Min length is 2 '
+                },
+                maxLength: {
+                  value: 60,
+                  message: 'Max length is 60 '
+                }
+              })}
+              helperText={(errors.userName && errors.userName.message) || ' '}
+              error={!!errors.userName}
               required
             />
             <CssTextField
               className={styles.textField}
-              label='Email'
               variant='outlined'
-              value={email}
-              onChange={(e) => validateEmail(e)}
+              label='Email'
+              {...register('userEmail', {
+                required: 'Empty field!',
+                pattern: {
+                  value: regExpEmail,
+                  message: 'Not correct email format'
+                }
+              })}
+              helperText={(errors.userEmail && errors.userEmail.message) || ' '}
+              error={!!errors.userEmail}
               required
-              error={!(email.includes('@') && email.includes('.'))}
-              helperText={email === '' ? 'Empty field!' : ' '}
-              InputLabelProps={{
-                required: false
-              }}
             />
             <CssTextField
               className={`${styles.textField} ${styles.phone}`}
-              id='phone'
               label='Phone'
               variant='outlined'
-              value={phone}
-              onChange={(e) => validatePhone(e)}
+              {...register('userPhone', {
+                required: '+38 (XXX) XXX-XX-XX',
+                pattern: {
+                  value: regExpPhone,
+                  message: '+38 (XXX) XXX-XX-XX'
+                },
+                minLength: {
+                  value: 13,
+                  message: '+38 (XXX) XXX-XX-XX'
+                },
+                maxLength: {
+                  value: 13,
+                  message: 'Max length is 13'
+                }
+              })}
+              helperText={(errors.userPhone && errors.userPhone.message) || ' '}
+              error={!!errors.userPhone}
               required
-              error={!phone.includes('+380')}
-              InputLabelProps={{
-                required: false
-              }}
             />
           </div>
           <div className={styles.radioGroup}>
@@ -134,33 +123,32 @@ export const Register = () => {
               <FormLabel focused={false} className={styles.radioGroupTitle}>
                 Select your position
               </FormLabel>
-              <RadioGroup
-                defaultValue={position}
-                name='radio-buttons-group'
-                color='#000'
-                value={position}
-                onChange={handlePosition}
-                required
-              >
+              <RadioGroup defaultValue={3} name='radio-buttons-group'>
                 <FormControlLabel
+                  {...register('userPosition')}
                   value={1}
                   control={<CssRadioButton />}
                   label='Frontend developer'
                   className={styles.radioGroupElement}
                 />
                 <FormControlLabel
+                  {...register('userPosition')}
                   value={2}
                   control={<CssRadioButton />}
                   label='Backend Developer'
                   className={styles.radioGroupElement}
                 />
                 <FormControlLabel
+                  {...register('userPosition')}
                   value={3}
                   control={<CssRadioButton />}
                   label='Designer'
                   className={styles.radioGroupElement}
                 />
                 <FormControlLabel
+                  {...register('userPosition', {
+                    required: true
+                  })}
                   value={4}
                   control={<CssRadioButton />}
                   label='QA'
@@ -170,24 +158,34 @@ export const Register = () => {
             </FormControl>
           </div>
           <div className={styles.inputFileEmement}>
-            <CssCustomInputLabel error={!photo === null}>
+            <CssCustomInputLabel error={!!errors.userFile}>
               Upload
               <input
                 className={styles.uploadButton}
                 accept='image/jpg, image/jpeg'
                 type='file'
-                name='image_upload'
-                onChange={(e) => handlePhoto(e)}
+                {...register('userFile', {
+                  required: true
+                })}
                 required
               />
             </CssCustomInputLabel>
             <CssCustomOutlinedInput
               className={styles.fileInput}
-              value={photo ? cutElementsName(photo) : 'Upload your photo'}
-              error={!photo === null}
+              error={!!errors.userFile}
+              value={
+                userFilesDidUpload()
+                  ? cutElementsName(userFiles[0])
+                  : 'Upload your photo'
+              }
             />
           </div>
-          <input type='submit' className={global.disabled} value={'Sign up'} />
+          <input
+            type='submit'
+            className={global.primary}
+            value={'Sign up'}
+            disabled={!isValid}
+          />
         </form>
       </div>
     </section>

@@ -18,22 +18,14 @@
     .textField {
       width: 100%;
       margin: 10px auto 20px;
-      position: relative;
-
-      &.phone::after {
-        display: block;
-        position: absolute;
-        content: '+38 (XXX) XXX - XX - XX';
-        font-size: 12px;
-        line-height: 18px;
-        color: #7e7e7e;
-        bottom: -20px;
-        left: 14px;
-      }
 
       input {
         padding: 14px 16px;
       }
+    }
+
+    input[type='submit'] {
+      display: block;
     }
   }
 }

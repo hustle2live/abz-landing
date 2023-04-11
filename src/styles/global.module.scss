@@ -56,16 +56,12 @@ button {
     &:hover {
       background: #ffe302;
     }
-  }
 
-  &.disabled {
-    display: block;
-    background: #b4b4b4;
-    color: rgba(255, 255, 255, 0.87);
-
-    &:hover {
-      background: #ffe302;
-      color: rgba(0, 0, 0, 0.87);
+    &:disabled {
+      display: block;
+      background: #b4b4b4;
+      color: rgba(255, 255, 255, 0.87);
+      cursor: default;
     }
   }
 }

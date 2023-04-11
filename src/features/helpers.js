@@ -7,6 +7,7 @@ export const cutElementsName = (obj) =>
 
 export const regExpName = /^[a-z а-яёЁЇїІіЄєҐґ ,.'-]+$/i;
 
-export const regExpEmail = /^[a-z 0-9 .@-_]+$/i;
+export const regExpEmail =
+  /^[a-z0-9_-]+[a-z0-9_.]*?@[a-z0-9_-]+?\.[a-zA-Z0-9]{2,6}$/;
 
-export const regExpPhone = /^[\+\d]*$/;
+export const regExpPhone = /^\+380[\d]+$/;
