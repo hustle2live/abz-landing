@@ -1,9 +1,4 @@
-import BackgroundImage from '../../assets/tyned_pexels-alexandr-podvalny.jpeg';
-import BackgroundExtraLarge from '../../assets/bg_4256x2832.jpeg';
-import BackgroundLarge from '../../assets/bg_2554x1699.jpg';
-import BackgroundMedium from '../../assets/bg_1702x1133.jpg';
-import BackgroundSmall from '../../assets/bg_766x510.jpg';
-
+import BackgroundImage from '../../assets/1x1.png';
 import Logo from '../../assets/Logo.svg';
 
 import global from '../../styles/global.module.scss';
@@ -26,32 +21,12 @@ export const Header = () => {
             </div>
          </div>
          <div className={styles.mainSection}>
-            <picture className={styles.backgroundImage}>
-               <source
-                  srcSet={BackgroundExtraLarge}
-                  type="image/jpeg"
-                  media="(min-width:1170px)"
-               />
-               <source
-                  srcSet={BackgroundLarge}
-                  type="image/jpeg"
-                  media="(max-width:1170px)"
-               />
-               <source
-                  srcSet={BackgroundMedium}
-                  type="image/jpeg"
-                  media="(max-width:1023px)"
-               />
-               <source
-                  srcSet={BackgroundSmall}
-                  type="image/jpeg"
-                  media="(max-width:767px)"
-               />
+            <div className={styles.backgroundImage}>
                <img
                   src={BackgroundImage}
                   alt="wheat field and blue sky as Ukraine freedom"
                />
-            </picture>
+            </div>
             <h1>Test assignment for front-end developer</h1>
             <p>
                What defines a good front-end developer is one that has skilled
