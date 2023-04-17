@@ -1,26 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import { Provider } from 'react-redux';
+import { ThemeProvider } from '@mui/material/styles';
+
 import App from './App';
+import Store from './store/store';
+import {Theme} from './styles/styledComponentsMUI';
+
+import reportWebVitals from './reportWebVitals';
 
 import './styles/global.module.scss';
 import './index.css';
 
-import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import { ThemeProvider } from '@mui/material/styles';
-import { Theme } from './styles/styledComponentsMUI';
-
-import store from './store/store';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <ThemeProvider theme={Theme}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </ThemeProvider>
-  </React.StrictMode>
+   <React.StrictMode>
+      <ThemeProvider theme={Theme}>
+         <Provider store={Store}>
+            <App />
+         </Provider>
+      </ThemeProvider>
+   </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

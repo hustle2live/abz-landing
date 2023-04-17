@@ -7,14 +7,14 @@ import { Register } from './components/Registration/Register';
 import { SuccessMessage } from './components/SendMessage/RegisterMessage';
 
 function App() {
-  const successSend = useSelector((state) => state.successSend);
-  return (
-    <>
-      <Header />
-      <Candidates />
-      {!successSend ? <Register /> : <SuccessMessage />}
-    </>
-  );
+   const successSend = useSelector((state) => state.successSend);
+   return (
+      <>
+         <Header />
+         <Candidates />
+         {!successSend ? <Register /> : <SuccessMessage />}
+      </>
+   );
 }
 
 export default App;
