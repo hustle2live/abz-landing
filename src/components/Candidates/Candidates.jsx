@@ -4,7 +4,9 @@ import { Box, CircularProgress, InputLabel, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import { fetchUsers, increaseUsersLimit } from '../../store/userslice';
+import { increaseUsersLimit } from '../../store/userslice';
+
+import { fetchUsers } from '../../store/api';
 
 import global from '../../styles/global.module.scss';
 import logo from '../../assets/photo-cover.svg';

@@ -14,3 +14,8 @@ export const regExpEmail =
    /^[a-z0-9_-]+[a-z0-9_.]*?@[a-z0-9_-]+?\.[a-zA-Z0-9]{2,6}$/;
 
 export const regExpPhone = /^\+380[\d]+$/;
+
+export const functionRejected = (state, action) => {
+   state.status = 'rejected';
+   state.error = action.payload;
+};

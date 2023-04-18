@@ -9,7 +9,7 @@ import {
    RadioGroup,
 } from '@mui/material';
 
-import { fetchToken } from '../../store/userslice';
+import { fetchToken } from '../../store/api';
 
 import {
    CssCustomInputLabel,
