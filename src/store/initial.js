@@ -3,7 +3,7 @@ const increment = 3;
 
 const initialState = {
    usersArray: [],
-   status: null,
+   status: 'loading',
    error: null,
    usersLimit: usersStartingLimit,
    fetchData: null,

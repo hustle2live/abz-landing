@@ -18,31 +18,6 @@ export const fetchPosition = createAsyncThunk(
    },
 );
 
-export const fetchToken = createAsyncThunk(
-   'users/fetchToken',
-   async function (formData, { rejectWithValue, dispatch }) {
-      try {
-         fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
-            .then(function (response) {
-               if (!response.ok) throw new Error('Server error');
-
-               return response.json();
-            })
-            .then(function (data) {
-               const token = data.token;
-               const action = { token, formData };
-               dispatch(postNewUser(action));
-               return data;
-            })
-            .catch(function (error) {
-               return rejectWithValue(error.message);
-            });
-      } catch (error) {
-         return rejectWithValue(error.message);
-      }
-   },
-);
-
 export const fetchUsers = createAsyncThunk(
    'users/fetchUsers',
    async function (limit = usersStartingLimit, { rejectWithValue }) {
@@ -59,26 +34,30 @@ export const fetchUsers = createAsyncThunk(
    },
 );
 
-export const postNewUser = createAsyncThunk(
-   'users/postNewUser',
-   async function (action, { rejectWithValue, dispatch }) {
+export const userRegister = createAsyncThunk(
+   'users/userRegister',
+   async function (formData, { rejectWithValue }) {
       try {
-         const userResponse = await fetch(
+         const getTokenResponse = await fetch(
+            'https://frontend-test-assignment-api.abz.agency/api/v1/token',
+         );
+         if (!getTokenResponse.ok) throw new Error('Can\'t get token. Error');
+         const data = await getTokenResponse.json();
+
+         const registerUserResponse = await fetch(
             'https://frontend-test-assignment-api.abz.agency/api/v1/users',
             {
                method: 'POST',
-               body: action.formData,
+               body: formData,
                headers: {
-                  Token: action.token,
+                  Token: data.token,
                },
             },
          );
-         if (!userResponse.ok) throw new Error('Server error');
-         const data = await userResponse.json();
-
-         dispatch(fetchUsers());
-
-         return data;
+         if (!registerUserResponse.ok)
+            throw new Error('User\'s registration Failed. Error');
+         const postData = await registerUserResponse.json();
+         return postData;
       } catch (error) {
          return rejectWithValue(error.message);
       }

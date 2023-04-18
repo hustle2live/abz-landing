@@ -15,7 +15,3 @@ export const regExpEmail =
 
 export const regExpPhone = /^\+380[\d]+$/;
 
-export const functionRejected = (state, action) => {
-   state.status = 'rejected';
-   state.error = action.payload;
-};

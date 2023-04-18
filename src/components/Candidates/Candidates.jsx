@@ -1,20 +1,17 @@
 import * as React from 'react';
-
 import { Box, CircularProgress, InputLabel, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import { increaseUsersLimit } from '../../store/userslice';
-
 import { fetchUsers } from '../../store/api';
-
 import global from '../../styles/global.module.scss';
 import logo from '../../assets/photo-cover.svg';
 
 import styles from './Candidates.module.scss';
 
 export const Candidates = () => {
-   const { status, error, usersArray, usersLimit } = useSelector(
+   const { status, error, usersArray, usersLimit, successSend } = useSelector(
       (state) => state,
    );
 
@@ -22,10 +19,10 @@ export const Candidates = () => {
 
    useEffect(() => {
       dispatch(fetchUsers(usersLimit));
-   }, [usersLimit]);
+   }, [dispatch, successSend, usersLimit]);
 
-   const UserCardElement = () =>
-      usersArray && usersArray.length
+   const UserCardElement = () => {
+      return usersArray && usersArray.length
          ? usersArray.map(({ id, name, phone, photo, position, email }) => (
             <div key={id} className={styles.card}>
                <div className={styles.card__image}>
@@ -47,6 +44,7 @@ export const Candidates = () => {
             </div>
          ))
          : null;
+   };
 
    const LoadingElement = () => (
       <Box className={styles.loadingElement} sx={{ margin: '20px auto' }}>

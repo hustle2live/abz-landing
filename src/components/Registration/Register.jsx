@@ -9,7 +9,7 @@ import {
    RadioGroup,
 } from '@mui/material';
 
-import { fetchToken } from '../../store/api';
+import { userRegister } from '../../store/api';
 
 import {
    CssCustomInputLabel,
@@ -39,6 +39,7 @@ export const Register = () => {
    } = useForm({
       mode: 'onTouched',
    });
+
    const userFiles = getValues('userFile');
    const userFilesDidUpload = () => userFiles && !!userFiles.length;
 
@@ -49,7 +50,7 @@ export const Register = () => {
       formData.append('email', data.userEmail);
       formData.append('phone', data.userPhone);
       formData.append('photo', data.userFile[0]);
-      return dispatch(fetchToken(formData));
+      dispatch(userRegister(formData));
    };
 
    return (
