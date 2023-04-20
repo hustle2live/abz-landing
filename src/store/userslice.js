@@ -5,7 +5,7 @@ import { fetchPosition, fetchUsers, userRegister } from './api.js';
 
 const stateError = (state, action) => {
    state.status = 'rejected';
-   state.error = action.payload;
+   state.error = action.payload || 'server error';
 };
 
 const stateLoading = (state) => {
