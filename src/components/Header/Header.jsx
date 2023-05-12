@@ -6,7 +6,7 @@ import styles from '../Header/Header.module.scss';
 
 export const Header = () => {
    return (
-      <header>
+      <>
          <div id="top" className={styles.topBar}>
             <div className={styles.topBarContainer}>
                <div className={styles.logoElement}>
@@ -37,6 +37,6 @@ export const Header = () => {
             </p>
             <button className={global.primary}>Sing Up</button>
          </div>
-      </header>
+      </>
    );
 };

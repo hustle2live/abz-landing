@@ -3,17 +3,23 @@ $bg-med: url('../../assets/bg_1702x1133.jpg');
 $bg-large: url('../../assets/bg_2554x1699.jpg');
 $bg-extra-large: url('../../assets/bg_4256x2832.jpeg');
 
+.topBar,
+.logoElement,
+.topButtons {
+   display: block;
+}
+
 .topBar {
    width: 100%;
    height: 60px;
    background-color: #ffffff;
 }
 
-.mainSection,
-.topBarContainer {
+.topBarContainer,
+.mainSection {
    max-width: 1170px;
-   display: flex;
    margin: 0 auto;
+   display: flex;
    align-items: center;
 }
 
@@ -24,11 +30,6 @@ $bg-extra-large: url('../../assets/bg_4256x2832.jpeg');
    button {
       margin-left: 10px;
    }
-}
-
-.logoElement,
-.topButtons {
-   display: block;
 }
 
 .logoElement {
@@ -42,6 +43,7 @@ $bg-extra-large: url('../../assets/bg_4256x2832.jpeg');
 .mainSection {
    flex-direction: column;
    height: 650px;
+   justify-content: center;
    position: relative;
 
    .backgroundImage {
@@ -70,14 +72,13 @@ $bg-extra-large: url('../../assets/bg_4256x2832.jpeg');
       z-index: 1;
    }
 
-   h1 {
-      margin: auto;
-      margin-bottom: 5px;
+   h1,
+   p {
       color: #ffffff;
    }
 
-   p {
-      color: #ffffff;
+   h1 {
+      margin-bottom: 5px;
    }
 
    button {
@@ -86,64 +87,85 @@ $bg-extra-large: url('../../assets/bg_4256x2832.jpeg');
    }
 }
 
-@media screen and (min-width: 1601px) {
-   .mainSection .backgroundImage img {
-      content: $bg-extra-large;
-   }
-}
-
-@media screen and (max-width: 1600px) {
-   .mainSection .backgroundImage img {
-      content: $bg-large;
-   }
-}
-
-@media screen and (max-width: 1170px) {
+@media screen and (min-width: 320px) {
    .mainSection {
-      max-width: 1024px;
-   }
-   .topBarContainer {
-      max-width: 904px;
-   }
-}
+      height: 500px;
+      width: 100%;
 
-@media screen and (max-width: 1023px) {
-   .mainSection {
-      max-width: 768px;
-      max-height: 500px;
-   }
-   .topBarContainer {
-      max-width: 704px;
-   }
-   .mainSection .backgroundImage img {
-      content: $bg-med;
-   }
-}
-
-@media screen and (max-width: 767px) {
-   .mainSection {
-      max-width: 360px;
+      .backgroundImage img {
+         content: $bg-small;
+         width: 140%;
+         height: 140%;
+         object-fit: cover;
+         left: 0;
+         bottom: 0;
+      }
 
       h1,
-      p,
-      button {
+      p {
          max-width: 328px;
+         margin-left: 16px;
+         margin-right: 16px;
       }
 
       button {
          margin-bottom: 70px;
       }
    }
+
    .topBarContainer {
-      max-width: 328px;
+      margin: 0 16px;
+   }
+}
+
+@media screen and (min-width: 768px) {
+   .mainSection {
+      h1,
+      p {
+         max-width: 380px;
+      }
+
+      .backgroundImage img {
+         content: $bg-med;
+      }
    }
 
-   .mainSection .backgroundImage img {
-      content: $bg-small;
-      width: 140%;
-      height: 140%;
-      object-fit: cover;
-      left: 0;
-      bottom: 0;
+   .topBarContainer {
+      margin: 0 32px;
+   }
+}
+
+@media screen and (min-width: 1024px) {
+   .mainSection {
+      height: 650px;
+
+      .backgroundImage img {
+         content: $bg-large;
+      }
+   }
+
+   .topBarContainer {
+      margin: 0 60px;
+   }
+}
+
+@media screen and (min-width: 1170px) {
+   .mainSection {
+      max-width: 1170px;
+
+      .backgroundImage img {
+         content: $bg-large;
+      }
+   }
+   .topBarContainer {
+      margin: 0 auto;
+   }
+}
+
+@media screen and (min-width: 1600px) {
+   .mainSection {
+      .backgroundImage img {
+         content: $bg-extra-large;
+      }
    }
 }
