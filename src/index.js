@@ -5,8 +5,8 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';
 
 import App from './App';
-import Store from './store/store';
-import {Theme} from './styles/styledComponentsMUI';
+import Store from './redux/store';
+import { Theme } from './styles/styledComponentsMUI';
 
 import reportWebVitals from './reportWebVitals';
 

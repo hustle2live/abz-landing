@@ -9,7 +9,7 @@ import {
    RadioGroup,
 } from '@mui/material';
 
-import { userRegister } from '../../store/api';
+import { userRegister } from '../../redux/apiRequests';
 
 import {
    CssCustomInputLabel,

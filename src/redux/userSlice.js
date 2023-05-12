@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { increment, initialState, usersStartingLimit } from './initial.js';
-import { fetchUsers, userRegister } from './api.js';
+import { increment, initialState, usersStartingLimit } from './initialState.js';
+import { fetchUsers, userRegister } from './apiRequests.js';
 
 const stateError = (state, action) => {
    state.status = 'rejected';

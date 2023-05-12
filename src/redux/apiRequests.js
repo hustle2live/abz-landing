@@ -1,30 +1,25 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { usersStartingLimit } from './initial.js';
+import { usersStartingLimit } from './initialState.js';
 
 
-const fetchPosition = () => {
-   return fetch(
-      'https://frontend-test-assignment-api.abz.agency/api/v1/positions',
-   )
-      .then((response) => {
-         if (!response.ok) throw new Error('Server error');
-         return response.json();
-      })
-      .then((data) => data);
+const fetchPosition = async () => {
+   const response = await fetch(
+      'https://frontend-test-assignment-api.abz.agency/api/v1/positions');
+   if (!response.ok) throw new Error('Server error');
+   const data = await response.json();
+   return data;
 };
 
-const fetchToken = () => {
-   return fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
-      .then((response) => {
-         if (!response.ok) throw new Error("Can't get token. Error");
-         return response.json();
-      })
-      .then((data) => data);
+const fetchToken = async () => {
+   const response = await fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token');
+   if (!response.ok) throw new Error("Can't get token. Error");
+   const data = await response.json();
+   return data;
 };
 
-const postUser = (userData, token) => {
-   return fetch(
+const postUser = async (userData, token) => {
+   const response = await fetch(
       'https://frontend-test-assignment-api.abz.agency/api/v1/users',
       {
          method: 'POST',
@@ -32,13 +27,10 @@ const postUser = (userData, token) => {
          headers: {
             Token: token,
          },
-      },
-   )
-      .then((response) => {
-         if (!response.ok) throw new Error("User's registration Failed. Error");
-         return response.json();
-      })
-      .then((data) => data);
+      });
+   if (!response.ok) throw new Error("User's registration Failed. Error");
+   const data = await response.json();
+   return data;
 };
 
 export const fetchUsers = createAsyncThunk(

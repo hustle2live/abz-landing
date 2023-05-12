@@ -3,8 +3,8 @@ import { Box, CircularProgress, InputLabel, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import { increaseUsersLimit } from '../../store/userslice';
-import { fetchUsers } from '../../store/api';
+import { increaseUsersLimit } from '../../redux/userSlice';
+import { fetchUsers } from '../../redux/apiRequests';
 import global from '../../styles/global.module.scss';
 import logo from '../../assets/photo-cover.svg';
 
