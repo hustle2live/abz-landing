@@ -1,15 +1,12 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-
 import {
    FormControl,
    FormControlLabel,
    FormLabel,
    RadioGroup,
 } from '@mui/material';
-
-import { userRegister } from '../../redux/apiRequests';
 
 import {
    CssCustomInputLabel,
@@ -24,6 +21,7 @@ import {
    regExpPhone,
 } from '../../features/helpers.js';
 
+import { userRegister } from '../../redux/apiRequests';
 import global from '../../styles/global.module.scss';
 
 import styles from './Register.module.scss';

@@ -21,8 +21,20 @@ export const Candidates = () => {
       dispatch(fetchUsers(usersLimit));
    }, [dispatch, successSend, usersLimit]);
 
-   const UserCardElement = () => {
-      return usersArray && usersArray.length
+   const LoadingElement = () => (
+      <Box className={styles.loadingElement} sx={{ margin: '20px auto' }}>
+         <CircularProgress />
+      </Box>
+   );
+
+   const ErrorMessage = (props) => (
+      <Typography variant="h4" component="p">
+         An error occured : {props.error}
+      </Typography>
+   );
+
+   const UserCardElement = () =>
+      usersArray && usersArray.length
          ? usersArray.map(({ id, name, phone, photo, position, email }) => (
             <div key={id} className={styles.card}>
                <div className={styles.card__image}>
@@ -44,19 +56,6 @@ export const Candidates = () => {
             </div>
          ))
          : null;
-   };
-
-   const LoadingElement = () => (
-      <Box className={styles.loadingElement} sx={{ margin: '20px auto' }}>
-         <CircularProgress />
-      </Box>
-   );
-
-   const ErrorMessage = (props) => (
-      <Typography variant="h4" component="p">
-         An error occured : {props.error}
-      </Typography>
-   );
 
    return (
       <section className={global.container}>
