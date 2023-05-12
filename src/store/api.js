@@ -2,21 +2,44 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { usersStartingLimit } from './initial.js';
 
-export const fetchPosition = createAsyncThunk(
-   'users/fetchPosition',
-   async function (_, { rejectWithValue }) {
-      try {
-         const response = await fetch(
-            'https://frontend-test-assignment-api.abz.agency/api/v1/positions',
-         );
+
+const fetchPosition = () => {
+   return fetch(
+      'https://frontend-test-assignment-api.abz.agency/api/v1/positions',
+   )
+      .then((response) => {
          if (!response.ok) throw new Error('Server error');
-         const positions = await response.json();
-         return positions;
-      } catch (error) {
-         return rejectWithValue(error.message);
-      }
-   },
-);
+         return response.json();
+      })
+      .then((data) => data);
+};
+
+const fetchToken = () => {
+   return fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
+      .then((response) => {
+         if (!response.ok) throw new Error("Can't get token. Error");
+         return response.json();
+      })
+      .then((data) => data);
+};
+
+const postUser = (userData, token) => {
+   return fetch(
+      'https://frontend-test-assignment-api.abz.agency/api/v1/users',
+      {
+         method: 'POST',
+         body: userData,
+         headers: {
+            Token: token,
+         },
+      },
+   )
+      .then((response) => {
+         if (!response.ok) throw new Error("User's registration Failed. Error");
+         return response.json();
+      })
+      .then((data) => data);
+};
 
 export const fetchUsers = createAsyncThunk(
    'users/fetchUsers',
@@ -35,38 +58,16 @@ export const fetchUsers = createAsyncThunk(
    },
 );
 
-const fetchToken = () =>
-   fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
-      .then((response) => {
-         if (!response.ok) throw new Error("Can't get token. Error");
-         return response.json();
-      })
-      .then((data) => data);
-
-const postUserRegister = (userData, token) =>
-   fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', {
-      method: 'POST',
-      body: userData,
-      headers: {
-         Token: token,
-      },
-   })
-      .then((response) => {
-         if (!response.ok) throw new Error("User's registration Failed. Error");
-         return response.json();
-      })
-      .then((data) => data);
-
 export const userRegister = createAsyncThunk(
    'users/userRegister',
    async function (formData, { rejectWithValue }) {
       try {
-         const getTokenResponse = await fetchToken();
-         const registerUserResponse = await postUserRegister(
+         const getNewTokenRequest = await fetchToken();
+         const registerNewUserRequest = await postUser(
             formData,
-            getTokenResponse.token,
+            getNewTokenRequest.token,
          );
-         return registerUserResponse;
+         return registerNewUserRequest;
       } catch (error) {
          return rejectWithValue(error.message);
       }

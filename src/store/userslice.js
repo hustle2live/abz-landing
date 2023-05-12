@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { increment, initialState, usersStartingLimit } from './initial.js';
-import { fetchPosition, fetchUsers, userRegister } from './api.js';
+import { fetchUsers, userRegister } from './api.js';
 
 const stateError = (state, action) => {
    state.status = 'rejected';
@@ -39,17 +39,10 @@ export const userSlice = createSlice({
          state.status = 'resolved';
          state.error = null;
       },
-      [fetchPosition.fulfilled]: (state, action) => {
-         state.fetchPosition = action.payload;
-         state.status = 'resolved';
-         state.error = null;
-      },
 
-      [fetchPosition.pending]: (state) => stateLoading(state),
       [fetchUsers.pending]: (state) => stateLoading(state),
       [userRegister.pending]: (state) => stateLoading(state),
 
-      [fetchPosition.rejected]: (state, action) => stateError(state, action),
       [fetchUsers.rejected]: (state, action) => stateError(state, action),
       [userRegister.rejected]: (state, action) => stateError(state, action),
    },
