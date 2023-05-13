@@ -169,10 +169,8 @@ export const Register = () => {
                </FormControl>
             </div>
             <div className={styles.fileUpload}>
-               <CssCustomInputLabel
-                  className={styles.fileUpload__fileInput} // not use
-                  error={!!errors.userFile}
-               >Upload
+               <CssCustomInputLabel error={!!errors.userFile}>
+                  Upload
                   <input
                      className={styles.fileUpload__fileInput_hidden}
                      accept="image/jpg, image/jpeg"
