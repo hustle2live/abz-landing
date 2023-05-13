@@ -39,9 +39,6 @@ h3 {
    align-items: center;
 }
 
-// input[type='submit'] {
-// }
-
 input[type='submit'],
 button {
    min-width: 100px;
@@ -69,15 +66,7 @@ button {
    }
 }
 
-input[type='file'] {
-   color: transparent;
-   width: 1px;
-   border: none;
 
-   &::file-selector-button {
-      visibility: hidden;
-   }
-}
 
 .invalid {
    border: 2px solid #cb3d40;

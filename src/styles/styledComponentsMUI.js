@@ -61,7 +61,7 @@ export const CssCustomInputLabel = styled(InputLabel)({
       fontSize: '16px',
       color: 'rgba(0, 0, 0, 0.87)',
       lineHeight: '26px',
-      padding: '14px 15px',
+      padding: '14px 0',
       border: '1px solid rgba(0, 0, 0, 0.87)',
       borderRadius: '4px 0 0 4px',
       boxSizing: 'border-box',
@@ -79,6 +79,7 @@ export const CssCustomOutlinedInput = styled(OutlinedInput)({
       borderRadius: '0 4px 4px 0',
       color: '#7E7E7E',
       zIndex: '-1',
+      padding: '15px 0',
    },
    '&.Mui-error': {
       border: '2px solid #CB3D40',

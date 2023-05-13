@@ -1,22 +1,29 @@
-.sectionTitle {
+.heading {
    margin-top: 0;
+   max-width: 1170px;
 }
 
-.registerSection {
-   form {
-      border: none;
-   }
+.formSubmit {
+   border: none;
+}
 
-   .textFieldsGroup {
-      margin: 0 auto;
-      max-width: 380px;
-      min-height: 54px;
-      align-items: center;
-      justify-content: center;
-      border: none;
-   }
+.textFieldsGroup,
+.fileUpload {
+   margin: 40px auto;
+}
 
-   .textField {
+.formSubmit,
+.textFieldsGroup {
+   max-width: 380px;
+}
+
+.textFieldsGroup {
+   min-height: 54px;
+   align-items: center;
+   justify-content: center;
+   border: none;
+
+   &__cssTextField {
       width: -webkit-fill-available;
       margin: 10px auto 20px;
 
@@ -24,77 +31,74 @@
          padding: 14px 16px;
       }
    }
+}
 
-   input[type='submit'] {
-      display: block;
+.radioGroup {
+   &__title {
+      margin-bottom: 5px;
+      color: rgba(0, 0, 0, 0.87);
+   }
+
+   &__element {
+      margin-top: 0;
+      margin-bottom: 0;
    }
 }
 
-.textFieldsGroup,
-.inputFileEmement {
-   margin: 40px auto;
-}
-
-.fileInput {
-   width: 297px;
-   max-height: 54px;
-   flex-grow: 1;
-   margin-left: -1px;
-
-   & fieldset,
-   input[type='text'] {
-      border: none;
-   }
-}
-
-.inputFileEmement {
+.fileUpload {
    display: flex;
    flex-wrap: nowrap;
    margin-bottom: 50px;
 
    label {
-      padding: 12px 15px;
+      padding: 14px 15px;
+      text-align: center;
    }
-}
 
-.radioGroupTitle {
-   margin-bottom: 5px;
-   color: rgba(0, 0, 0, 0.87);
-}
+   &__fileInput_hidden {
+      color: transparent;
+      width: 0;
+      height: 0;
+      border: none;
+      box-sizing: border-box;
 
-.radioGroupElement {
-   margin-top: 0;
-   margin-bottom: 0;
-}
-
-@media screen and (min-width: 320px) {
-   .registerSection {
-      form,
-      .textFieldsGroup {
-         max-width: 328px;
+      &::file-selector-button {
+         visibility: hidden;
       }
+   }
 
-      .inputFileEmement {
-         display: flex;
-         flex-wrap: nowrap;
+   &__description {
+      width: 297px;
+      max-height: 54px;
+      flex-grow: 1;
+      margin-left: -2px;
 
-         label {
-            padding: 12px 2px;
-            text-align: center;
-         }
-      }
-
-      .fileInput {
-         flex-grow: 1;
+      fieldset,
+      input[type='text'] {
+         border: none;
       }
    }
 }
 
-@media screen and (min-width: 420px) {
-   .registerSection {
-      form,
-      .textFieldsGroup {
-         max-width: 380px;
+@media screen and (max-width: 425px) {
+   .heading,
+   .formSubmit,
+   .textFieldsGroup {
+      max-width: 328px;
+   }
+}
+
+@media screen and (max-width: 340px) {
+   .heading,
+   .formSubmit,
+   .textFieldsGroup {
+      max-width: 300px;
+   }
+
+   .fileUpload {
+      label {
+         padding: 12px 2px;
+         text-align: center;
       }
    }
 }
