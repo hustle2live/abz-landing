@@ -6,29 +6,31 @@ import styles from '../Header/Header.module.scss';
 
 export const Header = () => {
    return (
-      <>
-         <div id="top" className={styles.topBar}>
-            <div className={styles.topBarContainer}>
-               <div className={styles.logoElement}>
+      <header>
+         <div id="top" className={styles.navbar}>
+            <div className={styles.navbar__container}>
+               <div className={styles.navbar__logo}>
                   <a href="#top">
                      <img src={Logo} alt="logo svg" />
                   </a>
                </div>
-               <div className={styles.topButtons}>
+               <div className={styles.navbar__buttons}>
                   <button className={global.primary}>Users</button>
                   <button className={global.primary}>Sing up</button>
                </div>
             </div>
          </div>
-         <div className={styles.mainSection}>
-            <div className={styles.backgroundImage}>
+         <div className={styles.content}>
+            <div className={styles.content_background}>
                <img
                   src={BackgroundImage}
                   alt="wheat field and blue sky as Ukraine freedom"
                />
             </div>
-            <h1>Test assignment for front-end developer</h1>
-            <p>
+            <h1 className={styles.content__title}>
+               Test assignment for front-end developer
+            </h1>
+            <p className={styles.content__text}>
                What defines a good front-end developer is one that has skilled
                knowledge of HTML, CSS, JS with a vast understanding of User
                design thinking as they'll be building web interfaces with
@@ -37,6 +39,6 @@ export const Header = () => {
             </p>
             <button className={global.primary}>Sing Up</button>
          </div>
-      </>
+      </header>
    );
 };
