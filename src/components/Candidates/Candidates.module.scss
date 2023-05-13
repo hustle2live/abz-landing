@@ -1,62 +1,65 @@
-h2,
-.cardSection {
+.heading,
+.candidates {
    margin: 0 auto;
+}
+
+.candidates,
+.candidates__card {
+   display: flex;
+}
+
+.candidates {
+   width: 100%;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   margin-top: 50px;
+
+   &__card {
+      background: #ffffff;
+      flex-direction: column;
+      text-align: center;
+      min-width: 282px;
+      max-width: 370px;
+      width: -webkit-fill-available;
+      height: 254px;
+      border: none;
+      box-sizing: border-box;
+      border-radius: 14px;
+      padding: 20px;
+      margin: 0;
+      margin-bottom: 29px;
+   }
+
+   &__photo {
+      display: block;
+      width: 100%;
+      max-height: 70px;
+
+      img {
+         width: 70px;
+         height: 70px;
+         border-radius: 50%;
+      }
+   }
+
+   &__name {
+      margin: 20px auto;
+      white-space: nowrap;
+   }
+
+   &__description {
+      &_position,
+      &_email,
+      &_phone {
+         margin: 0 auto;
+         white-space: nowrap;
+      }
+   }
 }
 
 button.more {
    margin-top: 21px;
-}
-
-.cardSection {
-   display: flex;
-   flex-direction: row;
-   flex-wrap: wrap;
-   margin-top: 50px;
-   width: 100%;
-   justify-content: space-between;
-
-   .card {
-      display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
-      width: -webkit-fill-available;
-      min-width: 282px;
-      max-width: 370px;
-      height: 254px;
-      text-align: center;
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 14px;
-      border: none;
-      margin: 0;
-      margin-bottom: 29px;
-
-      &__image {
-         display: block;
-         width: 100%;
-         max-height: 70px;
-
-         img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-         }
-      }
-
-      &__name {
-         margin: 20px auto;
-         white-space: nowrap;
-      }
-
-      &__description {
-         &__position,
-         &__email,
-         &__phone {
-            margin: 0 auto;
-            white-space: nowrap;
-         }
-      }
-   }
 }
 
 .loadingElement {
@@ -64,11 +67,11 @@ button.more {
 }
 
 @media screen and (min-width: 320px) {
-   .cardSection {
+   .candidates {
       justify-content: center;
       gap: 16px;
 
-      .card {
+      &__card {
          max-width: 282px;
          margin-bottom: 4px;
       }
@@ -80,16 +83,16 @@ button.more {
 }
 
 @media screen and (min-width: 360px) {
-   .cardSection {
-      .card {
+   .candidates {
+      &__card {
          max-width: 328px;
       }
    }
 }
 
 @media screen and (min-width: 768px) {
-   .cardSection {
-      .card {
+   .candidates {
+      &__card {
          max-width: 344px;
          margin-bottom: 16px;
       }
@@ -101,10 +104,10 @@ button.more {
 }
 
 @media screen and (min-width: 1024px) {
-   .cardSection {
+   .candidates {
       gap: 29px;
 
-      .card {
+      &__card {
          max-width: 282px;
          margin-bottom: 0;
       }
@@ -112,10 +115,10 @@ button.more {
 }
 
 @media screen and (min-width: 1170px) {
-   .cardSection {
+   .candidates {
       max-width: 1170px;
 
-      .card {
+      &__card {
          max-width: 370px;
       }
    }

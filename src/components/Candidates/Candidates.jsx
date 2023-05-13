@@ -33,35 +33,49 @@ export const Candidates = () => {
       </Typography>
    );
 
-   const UserCardElement = () =>
-      usersArray && usersArray.length
-         ? usersArray.map(({ id, name, phone, photo, position, email }) => (
-            <div key={id} className={styles.card}>
-               <div className={styles.card__image}>
-                  <img src={photo || logo} alt={`candidate id ${id}`} />
-               </div>
-               <InputLabel className={styles.card__name}>{name}</InputLabel>
-               <div className={styles.card__description}>
-                  <p className={styles.card__description__position}>
-                     {position}
-                  </p>
-                  <p
-                     className={`${styles.card__description__email}  ${global.tooltip}`}
-                  >
-                     <InputLabel>{email}</InputLabel>
-                     <span className={global.tooltiptext}>{email} </span>
-                  </p>
-                  <p className={styles.card__description__phone}>{phone}</p>
-               </div>
-            </div>
-         ))
-         : null;
-
    return (
       <section className={global.container}>
-         <h2>Working with GET request</h2>
-         <div className={styles.cardSection}>
-            <UserCardElement />
+         <h2 className={styles.heading}>Working with GET request</h2>
+         <div className={styles.candidates}>
+            {usersArray && usersArray.length
+               ? usersArray.map(
+                  ({ id, name, phone, photo, position, email }) => (
+                     <li key={id} className={styles.candidates__card}>
+                        <div className={styles.candidates__photo}>
+                           <img
+                              src={photo || logo}
+                              alt={'candidate'}
+                           />
+                        </div>
+                        <InputLabel className={styles.candidates__name}>
+                           {name}
+                        </InputLabel>
+                        <div className={styles.candidates__description}>
+                           <p
+                              className={
+                                 styles.candidates__description_position
+                              }
+                           >
+                              {position}
+                           </p>
+                           <p
+                              className={`${styles.candidates__description_email}  ${global.tooltip}`}
+                           >
+                              <InputLabel>{email}</InputLabel>
+                              <span className={global.tooltiptext}>
+                                 {email}{' '}
+                              </span>
+                           </p>
+                           <p
+                              className={styles.candidates__description_phone}
+                           >
+                              {phone}
+                           </p>
+                        </div>
+                     </li>
+                  ),
+               )
+               : null}
          </div>
          {status === 'loading' && <LoadingElement />}
          {error && <ErrorMessage error={error} />}
