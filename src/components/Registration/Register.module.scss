@@ -3,11 +3,6 @@
    max-width: 1170px;
 }
 
-.formSubmit {
-   border: none;
-}
-
-.textFieldsGroup,
 .fileUpload {
    margin: 40px auto;
 }
@@ -17,66 +12,75 @@
    max-width: 380px;
 }
 
-.textFieldsGroup {
-   min-height: 54px;
-   align-items: center;
-   justify-content: center;
+.formSubmit {
    border: none;
 
-   &__cssTextField {
-      width: -webkit-fill-available;
-      margin: 10px auto 20px;
-
-      input {
-         padding: 14px 16px;
-      }
-   }
-}
-
-.radioGroup {
-   &__title {
-      margin-bottom: 5px;
-      color: rgba(0, 0, 0, 0.87);
-   }
-
-   &__element {
-      margin-top: 0;
-      margin-bottom: 0;
-   }
-}
-
-.fileUpload {
-   display: flex;
-   flex-wrap: nowrap;
-   margin-bottom: 50px;
-
-   label {
-      padding: 14px 15px;
-      text-align: center;
-   }
-
-   &__fileInput_hidden {
-      color: transparent;
-      width: 0;
-      height: 0;
+   .textFieldsGroup {
+      min-height: 54px;
+      align-items: center;
+      justify-content: center;
       border: none;
-      box-sizing: border-box;
+      margin-bottom: 10px;
 
-      &::file-selector-button {
-         visibility: hidden;
+      &__cssTextField {
+         width: -webkit-fill-available;
+         margin: 11px auto;
+
+         input {
+            padding: 16px 16px;
+         }
       }
    }
 
-   &__description {
-      width: 297px;
-      max-height: 54px;
-      flex-grow: 1;
-      margin-left: -2px;
-
-      fieldset,
-      input[type='text'] {
-         border: none;
+   .radioGroup {
+      &__title {
+         margin-bottom: 5px;
+         color: rgba(0, 0, 0, 0.87);
       }
+
+      &__element {
+         margin-top: 0;
+         margin-bottom: 0;
+      }
+   }
+
+   .fileUpload {
+      display: flex;
+      flex-wrap: nowrap;
+      margin-bottom: 50px;
+
+      label {
+         padding: 14px auto;
+         text-align: center;
+      }
+
+      &__fileInput_hidden {
+         color: transparent;
+         width: 0;
+         height: 0;
+         border: none;
+         box-sizing: border-box;
+
+         &::file-selector-button {
+            visibility: hidden;
+         }
+      }
+
+      &__description {
+         width: 297px;
+         max-height: 54px;
+         flex-grow: 1;
+         margin-left: -2px;
+
+         fieldset,
+         input[type='text'] {
+            border: none;
+         }
+      }
+   }
+
+   input[type='submit'] {
+      display: block;
    }
 }
 

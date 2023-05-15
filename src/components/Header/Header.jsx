@@ -16,7 +16,7 @@ export const Header = () => {
                </div>
                <div className={styles.navbar__buttons}>
                   <button className={global.primary}>Users</button>
-                  <button className={global.primary}>Sing up</button>
+                  <button className={global.primary}>Sign up</button>
                </div>
             </div>
          </div>
@@ -37,7 +37,7 @@ export const Header = () => {
                accessibility in mind. They should also be excited to learn, as
                the world of Front-End Development keeps evolving.
             </p>
-            <button className={global.primary}>Sing Up</button>
+            <button className={global.primary}>Sign up</button>
          </div>
       </header>
    );
